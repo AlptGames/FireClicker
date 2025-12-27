@@ -15,6 +15,7 @@ public class Menu : MonoBehaviour
   public GameObject effect;
   public GameObject button;
   public AudioSource sound;
+    public GameObject limit;
 
    private void Start()
    {
@@ -41,5 +42,27 @@ public class Menu : MonoBehaviour
         moneyText.text = money.ToString();
     }
 
+    public void startBoost()
+    {
+        StartCoroutine(boost());
+    }
+
+    IEnumerator boost()
+    {
+        float timer = 0f;
+        if (money >= 20)
+        {
+            money -= 20;
+            while (timer < 30f)
+            {
+                money++;
+                limit.SetActive(false);
+                yield return new WaitForSeconds(1f); // пауза 2 секунды
+                timer += 1f;
+            }
+        }
+        limit.SetActive(true);
+        Debug.Log("Корутинa завершилась");
+    }
    
 }
