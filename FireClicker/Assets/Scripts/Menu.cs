@@ -15,7 +15,9 @@ public class Menu : MonoBehaviour
   public GameObject effect;
   public GameObject button;
   public AudioSource sound;
-    public GameObject limit;
+  public GameObject puk;
+  public int limit = 3;
+  public int cost = 5;
 
    private void Start()
    {
@@ -50,18 +52,20 @@ public class Menu : MonoBehaviour
     IEnumerator boost()
     {
         float timer = 0f;
-        if (money >= 20)
+        if (money >= cost && limit > 0)
         {
-            money -= 20;
-            while (timer < 30f)
+            money -= cost;
+            limit--;
+            while (timer < 5f)
             {
                 money++;
-                limit.SetActive(false);
+                puk.SetActive(false);
                 yield return new WaitForSeconds(1f); // пауза 2 секунды
                 timer += 1f;
             }
         }
-        limit.SetActive(true);
+        puk.SetActive(true);
+        cost = cost * 2; 
         Debug.Log("Корутинa завершилась");
     }
    
