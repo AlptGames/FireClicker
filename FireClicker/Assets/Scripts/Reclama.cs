@@ -7,7 +7,14 @@ using TMPro;
 public class Reclama : MonoBehaviour
 {
     public string idAdv;
+
+    public Menu money;
     
+    void Start()
+    {
+      money = GetComponent<Menu>();
+    }
+
       private void OnEnable()
       {
         YG2.onRewardAdv += Rewarded;
@@ -28,8 +35,8 @@ public class Reclama : MonoBehaviour
 
       public void SetReward()
       {
-        int totalMoney = PlayerPrefs.GetInt("totalMoney");
-        PlayerPrefs.SetInt("totalMoney", totalMoney + 100);
+        int money = PlayerPrefs.GetInt("money");
+        PlayerPrefs.SetInt("money", money + 100);
       }
 
       public void ShowRewardAdv_UseCallback()
