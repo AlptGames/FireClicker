@@ -24,8 +24,8 @@ public class Menu : MonoBehaviour
     public int priceGraffiti;
     bool chlen = true;
     public GameObject graffiti;
-    //bool chlen2 = true;
-   // public int priceGraffiti2;
+    bool chlen2 = true;
+    public int priceGraffiti2;
 
    private void Start()
    {
@@ -90,7 +90,7 @@ public class Menu : MonoBehaviour
         }
     }
 
-    /*public void BuyGrafiti2()
+    public void BuyGrafiti2()
     {
         if(money >= priceGraffiti2 && chlen2 == true)
         {
@@ -101,6 +101,6 @@ public class Menu : MonoBehaviour
             
             
         }
-    }*/
+    }
    
 }
