@@ -14,9 +14,6 @@ public class Menu : MonoBehaviour
      public GameObject effect;
      public GameObject button;
      public AudioSource sound;
-     public GameObject puk;
-     public int limit = 3;
-     public int cost = 5;
      public AudioSource soundGrafiti;
      bool chlen = true;
      public GameObject graffiti;
@@ -32,13 +29,29 @@ public class Menu : MonoBehaviour
      public Sprite skin2;
      bool chlen4 = true;
 
+
      public Sprite skin3;
      bool chlen5 = true;
 
      public Sprite skin4;
      bool chlen6 = true;
 
-     public AudioSource Nehvataet;
+
+     bool bool1 = true;
+     bool chlen7 = true;
+     bool chlen8 = true;
+     public Image bgImage;
+     public Sprite bgSkin1;
+     public Sprite bgSkin2;
+     public Sprite bgSkin3;
+
+     public int cpsFPM1 = 0;
+     public int costFPM1 = 15;
+     public TMP_Text costFPM1Text;
+
+     public int cpsTPM1 = 0;
+     public int costTPM1 = 5;
+     public TMP_Text costTPM1Text;
 
      public int moneyForClcik= 1;
      public Slider slider;
@@ -53,25 +66,26 @@ public class Menu : MonoBehaviour
          money = PlayerPrefs.GetInt("money");
          totalMoney = PlayerPrefs.GetInt("totalMoney");
          graffiti.SetActive(false);
-         //currentLevel = PlayerPrefs.GetInt("currentLevel");
-         //n = PlayerPrefs.GetInt("n");
-
-         //moneyForClcik = PlayerPrefs.GetInt("moneyForClicik");
-
-      // levelText = PlayerPrefs.GetString("levelText");
      }
 
      public void ButtonClick()
      {
          money = money + moneyForClcik;
-         totalMoney = totalMoney + moneyForClcik;
+         totalMoney++;
          PlayerPrefs.SetInt("money", money);
          PlayerPrefs.SetInt("totalMoney", totalMoney);
          Instantiate(effect, button.GetComponent<RectTransform>().position.normalized, Quaternion.identity);
          sound.Play();
-
-           //PlayerPrefs.SetInt("moneyForClicik", moneyForClcik);
      }
+     public static string FormatNumber(float num) 
+     { 
+         if (num >= 1000000) 
+             return (num / 1000000).ToString("0.##") + "M"; 
+         else if (num >= 1000) 
+             return (num / 1000).ToString("0.##") + "K"; 
+         else 
+             return num.ToString(); 
+     } 
      void Update()
      {
         // moneyText.text = money.ToString() + " $";
@@ -86,40 +100,56 @@ public class Menu : MonoBehaviour
             currentLevel++;
             n++;
             soundSliderLevel.Play();
-              //PlayerPrefs.SetInt("currentLevel", currentLevel);
-        // PlayerPrefs.SetInt("n", n);
-        // PlayerPrefs.SetString("levelText", levelText);
           }
           slider.value = (totalMoney % 100);
          // levelText.text = $"({currentLevel} Уровень";
           levelText.text = currentLevel.ToString() + " Уровень";
-          
-     }
+     } 
 
      public void startBoost()
      {
-         StartCoroutine(boost());
+         StartCoroutine(boosterTPM1());
      }
 
-     IEnumerator boost()
+     public void startBoost2()
+     {
+         StartCoroutine(boosterFPM1());
+     }
+
+     IEnumerator boosterTPM1()
      {
          float timer = 0f;
-         if (money >= cost && limit > 0)
+         if (money >= costTPM1)
          {
-             money -= cost;
-             limit--;
+             money -= costTPM1;
+             costTPM1 = costTPM1 * 2; 
+             costTPM1Text.text = costTPM1.ToString() + " $";
+             cpsTPM1 += 1;
              soundBoost.Play();
-             while (timer < 50f)
+             while (timer <= 60)
              {
-                 money++;
-                 puk.SetActive(false);
-                 yield return new WaitForSeconds(1f); // пауза 2 секунды
+                 money += cpsTPM1;
+                 yield return new WaitForSeconds(0.5f); // пауза 2 секунды
                  timer += 1f;
              }
          }
-         puk.SetActive(true);
-         cost = cost * 2; 
-         Debug.Log("Корутинa завершилась");
+     }
+
+     IEnumerator boosterFPM1()
+     {
+         if (money >= costFPM1)
+         {
+             money -= costFPM1;
+             costFPM1 = costFPM1 * 2;
+             costFPM1Text.text = costFPM1.ToString() + " $";
+             soundBoost.Play();
+             cpsFPM1 += 1;
+             while (true)
+             {
+                 money += cpsFPM1;
+                 yield return new WaitForSeconds(0.9f);
+             }
+         }
      }
 
      public void BuyGrafiti()
@@ -130,10 +160,6 @@ public class Menu : MonoBehaviour
              graffiti.SetActive(true);
              chlen = false;
              soundGrafiti.Play();
-         }
-         else
-         {
-            Nehvataet.Play();
          }
      }
 
@@ -146,10 +172,6 @@ public class Menu : MonoBehaviour
              chlen2 = false;
              soundGrafiti.Play();
          }
-         else
-         {
-            Nehvataet.Play();
-         }
      }
 
      public void BuyGrafiti3()
@@ -160,11 +182,6 @@ public class Menu : MonoBehaviour
              graffiti3.SetActive(true);
              chlen3 = false;
              soundGrafiti.Play();
-         }
-
-         else
-         {
-            Nehvataet.Play();
          }
      }
      public void BuySkin()
@@ -181,8 +198,6 @@ public class Menu : MonoBehaviour
          {
              button.transform.localScale = new Vector3(3, 16, 2);
              buttonImage.sprite = skin;
-             Nehvataet.Play();
-
          }
      }
 
@@ -200,7 +215,6 @@ public class Menu : MonoBehaviour
          {
              button.transform.localScale = new Vector3(3, 16, 2);
              buttonImage.sprite = skin2;
-             Nehvataet.Play();
          }
      }
 
@@ -218,7 +232,6 @@ public class Menu : MonoBehaviour
          {
              button.transform.localScale = new Vector3(4, 21, 3);
              buttonImage.sprite = skin3;
-             Nehvataet.Play();
          }
      }
 
@@ -236,18 +249,50 @@ public class Menu : MonoBehaviour
          {
              button.transform.localScale = new Vector3(2, 16, 2);
              buttonImage.sprite = skin4;
-             Nehvataet.Play();
          }
      }
 
-
-     public static string FormatNumber(float num) 
-     { 
-         if (num >= 1000000) 
-             return (num / 1000000).ToString("0.##") + "M"; 
-         else if (num >= 1000) 
-             return (num / 1000).ToString("0.##") + "K"; 
-         else 
-             return num.ToString(); 
+     public void BuyBGSkin1()
+     {
+         if(money >= 200 && bool1 == true)
+         { 
+             money = money - 200;
+             bgImage.sprite = bgSkin1;
+             bool1 = false;
+         }
+         else if(bool1 == false)
+         {
+             bgImage.sprite = bgSkin1;
+         }
      }
+
+      public void BuyBGSkin2()
+     {
+         if(money >= 300 && chlen7 == true)
+         { 
+             money = money - 300;
+             bgImage.sprite = bgSkin2;
+             chlen7 = false;
+         }
+         else if(chlen7 == false)
+         {
+             bgImage.sprite = bgSkin2;
+         }
+     }
+
+      public void BuyBGSkin3()
+     {
+         if(money >= 467 && chlen8 == true)
+         { 
+             money = money - 467;
+             bgImage.sprite = bgSkin3;
+             chlen8 = false;
+         }
+         else if(chlen8 == false)
+         {
+             bgImage.sprite = bgSkin3;
+         }
+     }
+
+     
 }
