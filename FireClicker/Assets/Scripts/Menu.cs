@@ -96,6 +96,7 @@ public class Menu : MonoBehaviour
      public AudioSource soundSliderLevel;
 
      public GameObject shopContent;
+     public GameObject shopButton;
      public bool canShop = true;
      public bool canSkins = true;
      public bool canGraffities = true;
@@ -126,11 +127,13 @@ public class Menu : MonoBehaviour
      {
          if (canShop == true)
          {
+             shopButton.transform.Translate(new Vector3(4.4f, 0f, 0f));
              shopContent.SetActive(true);
              canShop = false;
          }
          else
          {
+             shopButton.transform.Translate(new Vector3(-4.4f, 0f, 0f));
              shopContent.SetActive(false);
              canShop = true;
          }
