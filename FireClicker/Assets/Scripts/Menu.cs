@@ -49,9 +49,42 @@ public class Menu : MonoBehaviour
      public int costFPM1 = 15;
      public TMP_Text costFPM1Text;
 
+     public int cpsFPM2 = 0;
+     public int costFPM2 = 100;
+     public TMP_Text costFPM2Text;
+
+     public int cpsFPM3 = 0;
+     public int costFPM3 = 500;
+     public TMP_Text costFPM3Text;
+
+     public int cpsFPM4 = 0;
+     public int costFPM4 = 2500;
+     public TMP_Text costFPM4Text;
+
+     public int cpsFPM5 = 0;
+     public int costFPM5 = 5000;
+     public TMP_Text costFPM5Text;
+
+
      public int cpsTPM1 = 0;
      public int costTPM1 = 5;
      public TMP_Text costTPM1Text;
+
+     public int cpsTPM2 = 0;
+     public int costTPM2 = 150;
+     public TMP_Text costTPM2Text;
+
+     public int cpsTPM3 = 0;
+     public int costTPM3 = 500;
+     public TMP_Text costTPM3Text;
+
+     public int cpsTPM4 = 0;
+     public int costTPM4 = 2000;
+     public TMP_Text costTPM4Text;
+
+     public int cpsTPM5 = 0;
+     public int costTPM5 = 5000;
+     public TMP_Text costTPM5Text;
 
      public int moneyForClcik= 1;
      public Slider slider;
@@ -60,7 +93,6 @@ public class Menu : MonoBehaviour
      public TextMeshProUGUI levelText;
      public float nuzhnodenegchtoburovenapnut = 100;
      public float levelPoints;
-
      public AudioSource soundSliderLevel;
 
      public GameObject shopContent;
@@ -200,14 +232,55 @@ public class Menu : MonoBehaviour
           levelText.text = currentLevel.ToString() + " Уровень";
      } 
 
-     public void startBoost()
+     public void startBoostTPM1()
      {
          StartCoroutine(boosterTPM1());
      }
 
-     public void startBoost2()
+     public void startBoostTPM2()
+     {
+         StartCoroutine(boosterTPM2());
+     }
+
+     public void startBoostTPM3()
+     {
+         StartCoroutine(boosterTPM3());
+     }
+
+     public void startBoostTPM4()
+     {
+         StartCoroutine(boosterTPM4());
+     }
+
+     public void startBoostTPM5()
+     {
+         StartCoroutine(boosterTPM5());
+     }
+
+
+     public void startBoostFPM1()
      {
          StartCoroutine(boosterFPM1());
+     }
+
+     public void startBoostFPM2()
+     {
+         StartCoroutine(boosterFPM2());
+     }
+
+     public void startBoostFPM3()
+     {
+         StartCoroutine(boosterFPM3());
+     }
+
+     public void startBoostFPM4()
+     {
+         StartCoroutine(boosterFPM4());
+     }
+
+     public void startBoostFPM5()
+     {
+         StartCoroutine(boosterFPM5());
      }
 
      IEnumerator boosterTPM1()
@@ -217,12 +290,88 @@ public class Menu : MonoBehaviour
          {
              money -= costTPM1;
              costTPM1 = costTPM1 * 2; 
-             costTPM1Text.text = costTPM1.ToString() + " $";
+             costTPM1Text.text = FormatNumber(costTPM1) + " $";
              cpsTPM1 += 1;
              soundBoost.Play();
              while (timer <= 60)
              {
                  money += cpsTPM1;
+                 yield return new WaitForSeconds(0.5f); // пауза 2 секунды
+                 timer += 1f;
+             }
+         }
+     }
+
+     IEnumerator boosterTPM2()
+     {
+         float timer = 0f;
+         if (money >= costTPM2)
+         {
+             money -= costTPM2;
+             costTPM2 = costTPM2 * 2; 
+             costTPM2Text.text = FormatNumber(costTPM2) + " $";
+             cpsTPM2 += 1;
+             soundBoost.Play();
+             while (timer <= 60)
+             {
+                 money += cpsTPM2;
+                 yield return new WaitForSeconds(0.5f); // пауза 2 секунды
+                 timer += 1f;
+             }
+         }
+     }
+
+     IEnumerator boosterTPM3()
+     {
+         float timer = 0f;
+         if (money >= costTPM3)
+         {
+             money -= costTPM3;
+             costTPM3 = costTPM3 * 2; 
+             costTPM3Text.text = FormatNumber(costTPM3) + " $";
+             cpsTPM3 += 1;
+             soundBoost.Play();
+             while (timer <= 60)
+             {
+                 money += cpsTPM3;
+                 yield return new WaitForSeconds(0.5f); // пауза 2 секунды
+                 timer += 1f;
+             }
+         }
+     }
+
+     IEnumerator boosterTPM4()
+     {
+         float timer = 0f;
+         if (money >= costTPM4)
+         {
+             money -= costTPM4;
+             costTPM4 = costTPM4 * 2; 
+             costTPM4Text.text = FormatNumber(costTPM4) + " $";
+             cpsTPM4 += 1;
+             soundBoost.Play();
+             while (timer <= 60)
+             {
+                 money += cpsTPM4;
+                 yield return new WaitForSeconds(0.5f); // пауза 2 секунды
+                 timer += 1f;
+             }
+         }
+     }
+
+     IEnumerator boosterTPM5()
+     {
+         float timer = 0f;
+         if (money >= costTPM5)
+         {
+             money -= costTPM5;
+             costTPM5 = costTPM5 * 2; 
+             costTPM5Text.text = FormatNumber(costTPM5) + " $";
+             cpsTPM5 += 1;
+             soundBoost.Play();
+             while (timer <= 60)
+             {
+                 money += cpsTPM5;
                  yield return new WaitForSeconds(0.5f); // пауза 2 секунды
                  timer += 1f;
              }
@@ -235,12 +384,80 @@ public class Menu : MonoBehaviour
          {
              money -= costFPM1;
              costFPM1 = costFPM1 * 2;
-             costFPM1Text.text = costFPM1.ToString() + " $";
+             costFPM1Text.text = FormatNumber(costFPM1) + " $";
              soundBoost.Play();
              cpsFPM1 += 1;
              while (true)
              {
                  money += cpsFPM1;
+                 yield return new WaitForSeconds(0.9f);
+             }
+         }
+     }
+
+     IEnumerator boosterFPM2()
+     {
+         if (money >= costFPM2)
+         {
+             money -= costFPM2;
+             costFPM2 = costFPM2 * 2;
+             costFPM2Text.text = FormatNumber(costFPM2) + " $";
+             soundBoost.Play();
+             cpsFPM2 += 15;
+             while (true)
+             {
+                 money += cpsFPM2;
+                 yield return new WaitForSeconds(0.9f);
+             }
+         }
+     }
+
+     IEnumerator boosterFPM3()
+     {
+         if (money >= costFPM3)
+         {
+             money -= costFPM3;
+             costFPM3 = costFPM3 * 2;
+             costFPM3Text.text = FormatNumber(costFPM3) + " $";
+             soundBoost.Play();
+             cpsFPM3 += 50;
+             while (true)
+             {
+                 money += cpsFPM3;
+                 yield return new WaitForSeconds(0.9f);
+             }
+         }
+     }
+
+     IEnumerator boosterFPM4()
+     {
+         if (money >= costFPM4)
+         {
+             money -= costFPM4;
+             costFPM4 = costFPM4 * 2;
+             costFPM4Text.text = FormatNumber(costFPM4) + " $";
+             soundBoost.Play();
+             cpsFPM4 += 200;
+             while (true)
+             {
+                 money += cpsFPM4;
+                 yield return new WaitForSeconds(0.9f);
+             }
+         }
+     }
+
+     IEnumerator boosterFPM5()
+     {
+         if (money >= costFPM5)
+         {
+             money -= costFPM5;
+             costFPM5 = costFPM5 * 2;
+             costFPM5Text.text = FormatNumber(costFPM5) + " $";
+             soundBoost.Play();
+             cpsFPM5 += 1000;
+             while (true)
+             {
+                 money += cpsFPM5;
                  yield return new WaitForSeconds(0.9f);
              }
          }
