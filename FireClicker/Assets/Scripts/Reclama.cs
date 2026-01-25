@@ -36,7 +36,7 @@ public class Reclama : MonoBehaviour
       public void SetReward()
       {
         int money = PlayerPrefs.GetInt("money");
-        PlayerPrefs.SetInt("money", money + 100);
+        PlayerPrefs.SetInt("money", money * 2);
       }
 
       public void ShowRewardAdv_UseCallback()

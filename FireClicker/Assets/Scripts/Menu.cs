@@ -58,6 +58,8 @@ public class Menu : MonoBehaviour
      public int currentLevel;
      private int n = 1;
      public TextMeshProUGUI levelText;
+     public float nuzhnodenegchtoburovenapnut = 100;
+     public float levelPoints;
 
      public AudioSource soundSliderLevel;
 
@@ -72,6 +74,7 @@ public class Menu : MonoBehaviour
      {
          money = money + moneyForClcik;
          totalMoney++;
+         levelPoints++;
          PlayerPrefs.SetInt("money", money);
          PlayerPrefs.SetInt("totalMoney", totalMoney);
          Instantiate(effect, button.GetComponent<RectTransform>().position.normalized, Quaternion.identity);
@@ -95,14 +98,16 @@ public class Menu : MonoBehaviour
           {
               moneyText.text = FormatNumber(money);
           }
-          if(totalMoney >= 100 * n)
+          if(levelPoints >= nuzhnodenegchtoburovenapnut)
           {
             currentLevel++;
-            n++;
+            levelPoints = 0;
+            nuzhnodenegchtoburovenapnut = nuzhnodenegchtoburovenapnut * 1.5f;
+            slider.maxValue = nuzhnodenegchtoburovenapnut;
             soundSliderLevel.Play();
           }
-          slider.value = (totalMoney % 100);
-         // levelText.text = $"({currentLevel} Уровень";
+          slider.value = (levelPoints % nuzhnodenegchtoburovenapnut);
+
           levelText.text = currentLevel.ToString() + " Уровень";
      } 
 
