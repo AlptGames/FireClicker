@@ -63,6 +63,15 @@ public class Menu : MonoBehaviour
 
      public AudioSource soundSliderLevel;
 
+     public GameObject shopContent;
+     public bool canShop = true;
+     public bool canSkins = true;
+     public bool canGraffities = true;
+     public bool canWalls = true;
+     public GameObject skinsShopContent;
+     public GameObject graffitiesShopContent;
+     public GameObject wallsShopContent;
+
      private void Start()
      {
          money = PlayerPrefs.GetInt("money");
@@ -79,6 +88,86 @@ public class Menu : MonoBehaviour
          PlayerPrefs.SetInt("totalMoney", totalMoney);
          Instantiate(effect, button.GetComponent<RectTransform>().position.normalized, Quaternion.identity);
          sound.Play();
+     }
+     
+     public void ShopClick()
+     {
+         if (canShop == true)
+         {
+             shopContent.SetActive(true);
+             canShop = false;
+         }
+         else
+         {
+             shopContent.SetActive(false);
+             canShop = true;
+         }
+     }
+     public void SkinsShopContent()
+     {
+         if (canSkins == true && canWalls == true && canGraffities == true)
+         {
+             skinsShopContent.SetActive(true);
+             canSkins = false;
+         }
+         else if (canSkins == true && canGraffities == false)
+         {
+             graffitiesShopContent.SetActive(false);
+             canGraffities = true;
+             skinsShopContent.SetActive(true);
+             canSkins = false;
+         }
+         else if (canSkins == true && canWalls == false)
+         {
+             wallsShopContent.SetActive(false);
+             canWalls = true;
+             skinsShopContent.SetActive(true);
+             canSkins = false;
+         }
+     }
+     public void GraffitiesShopContent()
+     {
+         if (canSkins == true && canWalls == true && canGraffities == true)
+         {
+             graffitiesShopContent.SetActive(true);
+             canGraffities = false;
+         }
+         else if (canGraffities == true && canSkins == false)
+         {
+             skinsShopContent.SetActive(false);
+             canSkins = true;
+             graffitiesShopContent.SetActive(true);
+             canGraffities = false;
+         }
+         else if (canGraffities == true && canWalls == false)
+         {
+             wallsShopContent.SetActive(false);
+             canWalls = true;
+             graffitiesShopContent.SetActive(true);
+             canGraffities = false;
+         }
+     }
+     public void WallsShopContent()
+     {
+         if (canSkins == true && canWalls == true && canGraffities == true)
+         {
+             wallsShopContent.SetActive(true);
+             canWalls = false;
+         }
+         else if (canWalls == true && canSkins == false)
+         {
+             skinsShopContent.SetActive(false);
+             canSkins = true;
+             wallsShopContent.SetActive(true);
+             canWalls = false;
+         }
+         else if (canWalls == true && canGraffities == false)
+         {
+             graffitiesShopContent.SetActive(false);
+             canGraffities = true;
+             wallsShopContent.SetActive(true);
+             canWalls = false;
+         }
      }
      public static string FormatNumber(float num) 
      { 
