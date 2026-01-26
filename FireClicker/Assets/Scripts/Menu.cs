@@ -86,7 +86,7 @@ public class Menu : MonoBehaviour
      public int costTPM5 = 5000;
      public TMP_Text costTPM5Text;
 
-     public int moneyForClcik= 1;
+     public int moneyForClcik = 1;
      public Slider slider;
      public int currentLevel;
      private int n = 1;
@@ -104,6 +104,8 @@ public class Menu : MonoBehaviour
      public GameObject skinsShopContent;
      public GameObject graffitiesShopContent;
      public GameObject wallsShopContent;
+
+     public AudioSource bomzh;
 
      private void Start()
      {
@@ -303,6 +305,10 @@ public class Menu : MonoBehaviour
                  timer += 1f;
              }
          }
+         else if (money < costTPM1)
+         {
+             bomzh.Play();
+         }
      }
 
      IEnumerator boosterTPM2()
@@ -321,6 +327,10 @@ public class Menu : MonoBehaviour
                  yield return new WaitForSeconds(0.5f); // пауза 2 секунды
                  timer += 1f;
              }
+         }
+         else
+         {
+             bomzh.Play();
          }
      }
 
@@ -341,6 +351,10 @@ public class Menu : MonoBehaviour
                  timer += 1f;
              }
          }
+         else
+         {
+             bomzh.Play();
+         }
      }
 
      IEnumerator boosterTPM4()
@@ -359,6 +373,10 @@ public class Menu : MonoBehaviour
                  yield return new WaitForSeconds(0.5f); // пауза 2 секунды
                  timer += 1f;
              }
+         }
+         else
+         {
+             bomzh.Play();
          }
      }
 
@@ -379,6 +397,10 @@ public class Menu : MonoBehaviour
                  timer += 1f;
              }
          }
+         else
+         {
+             bomzh.Play();
+         }
      }
 
      IEnumerator boosterFPM1()
@@ -395,6 +417,10 @@ public class Menu : MonoBehaviour
                  money += cpsFPM1;
                  yield return new WaitForSeconds(0.9f);
              }
+         }
+         else
+         {
+             bomzh.Play();
          }
      }
 
@@ -413,6 +439,10 @@ public class Menu : MonoBehaviour
                  yield return new WaitForSeconds(0.9f);
              }
          }
+         else
+         {
+             bomzh.Play();
+         }
      }
 
      IEnumerator boosterFPM3()
@@ -429,6 +459,10 @@ public class Menu : MonoBehaviour
                  money += cpsFPM3;
                  yield return new WaitForSeconds(0.9f);
              }
+         }
+         else
+         {
+             bomzh.Play();
          }
      }
 
@@ -447,6 +481,10 @@ public class Menu : MonoBehaviour
                  yield return new WaitForSeconds(0.9f);
              }
          }
+         else
+         {
+             bomzh.Play();
+         }
      }
 
      IEnumerator boosterFPM5()
@@ -464,6 +502,10 @@ public class Menu : MonoBehaviour
                  yield return new WaitForSeconds(0.9f);
              }
          }
+         else
+         {
+             bomzh.Play();
+         }
      }
 
      public void BuyGrafiti()
@@ -474,6 +516,21 @@ public class Menu : MonoBehaviour
              graffiti.SetActive(true);
              chlen = false;
              soundGrafiti.Play();
+         }
+         else if(chlen == false)
+         {
+             if(graffiti.activeInHierarchy == true)
+             {
+                 graffiti.SetActive(false);
+             }
+             else
+             {
+                 graffiti.SetActive(true);
+             }
+         }
+         else
+         {
+             bomzh.Play();
          }
      }
 
@@ -486,6 +543,21 @@ public class Menu : MonoBehaviour
              chlen2 = false;
              soundGrafiti.Play();
          }
+         else if(chlen2 == false)
+         {
+             if(graffiti2.activeInHierarchy == true)
+             {
+                 graffiti2.SetActive(false);
+             }
+             else
+             {
+                 graffiti2.SetActive(true);
+             }
+         }
+         else
+         {
+             bomzh.Play();
+         }
      }
 
      public void BuyGrafiti3()
@@ -496,6 +568,21 @@ public class Menu : MonoBehaviour
              graffiti3.SetActive(true);
              chlen3 = false;
              soundGrafiti.Play();
+         }
+         else if(chlen3 == false)
+         {
+             if(graffiti3.activeInHierarchy == true)
+             {
+                 graffiti3.SetActive(false);
+             }
+             else
+             {
+                 graffiti3.SetActive(true);
+             }
+         }
+         else
+         {
+             bomzh.Play();
          }
      }
      public void BuySkin()
@@ -512,6 +599,10 @@ public class Menu : MonoBehaviour
          {
              button.transform.localScale = new Vector3(3, 16, 2);
              buttonImage.sprite = skin;
+         }
+         else
+         {
+             bomzh.Play();
          }
      }
 
@@ -530,6 +621,10 @@ public class Menu : MonoBehaviour
              button.transform.localScale = new Vector3(3, 16, 2);
              buttonImage.sprite = skin2;
          }
+         else
+         {
+             bomzh.Play();
+         }
      }
 
      public void BuySkin3()
@@ -546,6 +641,10 @@ public class Menu : MonoBehaviour
          {
              button.transform.localScale = new Vector3(4, 21, 3);
              buttonImage.sprite = skin3;
+         }
+         else
+         {
+             bomzh.Play();
          }
      }
 
@@ -564,6 +663,10 @@ public class Menu : MonoBehaviour
              button.transform.localScale = new Vector3(2, 16, 2);
              buttonImage.sprite = skin4;
          }
+         else
+         {
+             bomzh.Play();
+         }
      }
 
      public void BuyBGSkin1()
@@ -578,9 +681,13 @@ public class Menu : MonoBehaviour
          {
              bgImage.sprite = bgSkin1;
          }
+         else
+         {
+             bomzh.Play();
+         }
      }
 
-      public void BuyBGSkin2()
+     public void BuyBGSkin2()
      {
          if(money >= 300 && chlen7 == true)
          { 
@@ -592,9 +699,13 @@ public class Menu : MonoBehaviour
          {
              bgImage.sprite = bgSkin2;
          }
+         else
+         {
+             bomzh.Play();
+         }
      }
 
-      public void BuyBGSkin3()
+     public void BuyBGSkin3()
      {
          if(money >= 467 && chlen8 == true)
          { 
@@ -605,6 +716,10 @@ public class Menu : MonoBehaviour
          else if(chlen8 == false)
          {
              bgImage.sprite = bgSkin3;
+         }
+         else
+         {
+             bomzh.Play();
          }
      }
 
