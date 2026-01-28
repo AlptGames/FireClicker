@@ -107,6 +107,8 @@ public class Menu : MonoBehaviour
 
      public AudioSource bomzh;
 
+    // public AudioSource soundus;
+
      private void Start()
      {
          money = PlayerPrefs.GetInt("money");
@@ -123,6 +125,7 @@ public class Menu : MonoBehaviour
          PlayerPrefs.SetInt("totalMoney", totalMoney);
          Instantiate(effect, button.GetComponent<RectTransform>().position.normalized, Quaternion.identity);
          sound.Play();
+         //soundus.Play();
      }
      
      public void ShopClick()
@@ -593,7 +596,7 @@ public class Menu : MonoBehaviour
              button.transform.localScale = new Vector3(3, 16, 2);
              buttonImage.sprite = skin;
              chlenS = false;
-             SkinSound.Play();
+             soundBoost.Play();
          }
          else if(chlenS == false)
          {
@@ -614,7 +617,7 @@ public class Menu : MonoBehaviour
              button.transform.localScale = new Vector3(3, 16, 2);
              buttonImage.sprite = skin2;
              chlen4 = false;
-             SkinSound.Play();
+             soundBoost.Play();
          }
          else if(chlen4 == false)
          {
@@ -635,7 +638,7 @@ public class Menu : MonoBehaviour
              button.transform.localScale = new Vector3(4, 21, 3);
              buttonImage.sprite = skin3;
              chlen5 = false;
-             SkinSound.Play();
+             soundBoost.Play();
          }
          else if(chlen5 == false)
          {
@@ -656,7 +659,7 @@ public class Menu : MonoBehaviour
              button.transform.localScale = new Vector3(2, 16, 2);
              buttonImage.sprite = skin4;
              chlen6 = false;
-             SkinSound.Play();
+             soundBoost.Play();
          }
          else if(chlen6 == false)
          {
@@ -676,6 +679,7 @@ public class Menu : MonoBehaviour
              money = money - 200;
              bgImage.sprite = bgSkin1;
              bool1 = false;
+              soundBoost.Play();
          }
          else if(bool1 == false)
          {
@@ -694,6 +698,7 @@ public class Menu : MonoBehaviour
              money = money - 300;
              bgImage.sprite = bgSkin2;
              chlen7 = false;
+              soundBoost.Play();
          }
          else if(chlen7 == false)
          {
@@ -712,6 +717,7 @@ public class Menu : MonoBehaviour
              money = money - 467;
              bgImage.sprite = bgSkin3;
              chlen8 = false;
+              soundBoost.Play();
          }
          else if(chlen8 == false)
          {
