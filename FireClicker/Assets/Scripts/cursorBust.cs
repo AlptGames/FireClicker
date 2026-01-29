@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
+using UnityEngine.UI;
 
 public class NewBehaviourScript : MonoBehaviour, IPointerDownHandler
 {
@@ -12,6 +13,9 @@ public class NewBehaviourScript : MonoBehaviour, IPointerDownHandler
     public AudioSource buySound;
     public AudioSource neHvataet;
     public TMP_Text costCursor;
+    public Button activateBooster;
+    public GameObject activateBoosterIcon;
+    public GameObject disableQ;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,11 +42,14 @@ public class NewBehaviourScript : MonoBehaviour, IPointerDownHandler
         {
             osnScript.money -= tsena;
             tsena *= 2;
+            activateBooster.interactable = true;
+            activateBoosterIcon.SetActive(true);
+            disableQ.SetActive(false);
             costCursor.text = FormatNumber(tsena) + " $";
             osnScript.moneyForClcik = osnScript.moneyForClcik + plusKnazhatiu;
             buySound.Play();
         }
-        else
+        else if (osnScript.money < tsena)
         {
             neHvataet.Play();
         }

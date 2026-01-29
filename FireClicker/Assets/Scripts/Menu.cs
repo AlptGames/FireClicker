@@ -46,45 +46,74 @@ public class Menu : MonoBehaviour
      public Sprite bgSkin3;
 
      public int cpsFPM1 = 0;
-     public int costFPM1 = 15;
+     public int costFPM1 = 75;
      public TMP_Text costFPM1Text;
+     public Button buttonFPM1;
+     public GameObject FPM1Icon;
+     public GameObject FPM1q;
 
      public int cpsFPM2 = 0;
-     public int costFPM2 = 100;
+     public int costFPM2 = 300;
      public TMP_Text costFPM2Text;
+     public Button buttonFPM2;
+     public GameObject FPM2Icon;
+     public GameObject FPM2q;
 
      public int cpsFPM3 = 0;
-     public int costFPM3 = 500;
+     public int costFPM3 = 1000;
      public TMP_Text costFPM3Text;
+     public Button buttonFPM3;
+     public GameObject FPM3Icon;
+     public GameObject FPM3q;
 
      public int cpsFPM4 = 0;
      public int costFPM4 = 2500;
      public TMP_Text costFPM4Text;
+     public Button buttonFPM4;
+     public GameObject FPM4Icon;
+     public GameObject FPM4q;
 
      public int cpsFPM5 = 0;
      public int costFPM5 = 5000;
      public TMP_Text costFPM5Text;
-
+     public Button buttonFPM5;
+     public GameObject FPM5Icon;
+     public GameObject FPM5q;
 
      public int cpsTPM1 = 0;
-     public int costTPM1 = 5;
+     public int costTPM1 = 30;
      public TMP_Text costTPM1Text;
+     public Button buttonTPM1;
+     public GameObject TPM1Icon;
+     public GameObject TPM1q;
 
      public int cpsTPM2 = 0;
-     public int costTPM2 = 150;
+     public int costTPM2 = 100;
      public TMP_Text costTPM2Text;
+     public Button buttonTPM2;
+     public GameObject TPM2Icon;
+     public GameObject TPM2q;
 
      public int cpsTPM3 = 0;
      public int costTPM3 = 500;
      public TMP_Text costTPM3Text;
+     public Button buttonTPM3;
+     public GameObject TPM3Icon;
+     public GameObject TPM3q;
 
      public int cpsTPM4 = 0;
      public int costTPM4 = 2000;
      public TMP_Text costTPM4Text;
+     public Button buttonTPM4;
+     public GameObject TPM4Icon;
+     public GameObject TPM4q;
 
      public int cpsTPM5 = 0;
      public int costTPM5 = 5000;
      public TMP_Text costTPM5Text;
+     public Button buttonTPM5;
+     public GameObject TPM5Icon;
+     public GameObject TPM5q;
 
      public int moneyForClcik = 1;
      public Slider slider;
@@ -106,8 +135,6 @@ public class Menu : MonoBehaviour
      public GameObject wallsShopContent;
 
      public AudioSource bomzh;
-
-    // public AudioSource soundus;
 
      private void Start()
      {
@@ -220,7 +247,6 @@ public class Menu : MonoBehaviour
      } 
      void Update()
      {
-        // moneyText.text = money.ToString() + " $";
           moneyText.text = FormatNumber(money) + " $";
 
           if(money > 999)
@@ -299,6 +325,9 @@ public class Menu : MonoBehaviour
              money -= costTPM1;
              costTPM1 = costTPM1 * 2; 
              costTPM1Text.text = FormatNumber(costTPM1) + " $";
+             buttonTPM1.interactable = true;
+             TPM1Icon.SetActive(true);
+             TPM1q.SetActive(false);
              cpsTPM1 += 1;
              soundBoost.Play();
              while (timer <= 60)
@@ -322,7 +351,10 @@ public class Menu : MonoBehaviour
              money -= costTPM2;
              costTPM2 = costTPM2 * 2; 
              costTPM2Text.text = FormatNumber(costTPM2) + " $";
-             cpsTPM2 += 1;
+             buttonTPM2.interactable = true;
+             TPM2Icon.SetActive(true);
+             TPM2q.SetActive(false);
+             cpsTPM2 += 20;
              soundBoost.Play();
              while (timer <= 60)
              {
@@ -331,7 +363,7 @@ public class Menu : MonoBehaviour
                  timer += 1f;
              }
          }
-         else
+         else if (money < costTPM2)
          {
              bomzh.Play();
          }
@@ -345,7 +377,10 @@ public class Menu : MonoBehaviour
              money -= costTPM3;
              costTPM3 = costTPM3 * 2; 
              costTPM3Text.text = FormatNumber(costTPM3) + " $";
-             cpsTPM3 += 1;
+             buttonTPM3.interactable = true;
+             TPM3Icon.SetActive(true);
+             TPM3q.SetActive(false);
+             cpsTPM3 += 75;
              soundBoost.Play();
              while (timer <= 60)
              {
@@ -354,7 +389,7 @@ public class Menu : MonoBehaviour
                  timer += 1f;
              }
          }
-         else
+         else if (money < costTPM3)
          {
              bomzh.Play();
          }
@@ -368,7 +403,10 @@ public class Menu : MonoBehaviour
              money -= costTPM4;
              costTPM4 = costTPM4 * 2; 
              costTPM4Text.text = FormatNumber(costTPM4) + " $";
-             cpsTPM4 += 1;
+             buttonTPM4.interactable = true;
+             TPM4Icon.SetActive(true);
+             TPM4q.SetActive(false);
+             cpsTPM4 += 150;
              soundBoost.Play();
              while (timer <= 60)
              {
@@ -377,7 +415,7 @@ public class Menu : MonoBehaviour
                  timer += 1f;
              }
          }
-         else
+         else if (money < costTPM4)
          {
              bomzh.Play();
          }
@@ -391,7 +429,10 @@ public class Menu : MonoBehaviour
              money -= costTPM5;
              costTPM5 = costTPM5 * 2; 
              costTPM5Text.text = FormatNumber(costTPM5) + " $";
-             cpsTPM5 += 1;
+             buttonTPM5.interactable = true;
+             TPM5Icon.SetActive(true);
+             TPM5q.SetActive(false);
+             cpsTPM5 += 500;
              soundBoost.Play();
              while (timer <= 60)
              {
@@ -400,7 +441,7 @@ public class Menu : MonoBehaviour
                  timer += 1f;
              }
          }
-         else
+         else if (money < costTPM5)
          {
              bomzh.Play();
          }
@@ -413,6 +454,9 @@ public class Menu : MonoBehaviour
              money -= costFPM1;
              costFPM1 = costFPM1 * 2;
              costFPM1Text.text = FormatNumber(costFPM1) + " $";
+             buttonFPM1.interactable = true;
+             FPM1Icon.SetActive(true);
+             FPM1q.SetActive(false);
              soundBoost.Play();
              cpsFPM1 += 1;
              while (true)
@@ -421,7 +465,7 @@ public class Menu : MonoBehaviour
                  yield return new WaitForSeconds(0.9f);
              }
          }
-         else
+         else if (money < costFPM1)
          {
              bomzh.Play();
          }
@@ -434,6 +478,9 @@ public class Menu : MonoBehaviour
              money -= costFPM2;
              costFPM2 = costFPM2 * 2;
              costFPM2Text.text = FormatNumber(costFPM2) + " $";
+             buttonFPM2.interactable = true;
+             FPM2Icon.SetActive(true);
+             FPM2q.SetActive(false);
              soundBoost.Play();
              cpsFPM2 += 15;
              while (true)
@@ -442,7 +489,7 @@ public class Menu : MonoBehaviour
                  yield return new WaitForSeconds(0.9f);
              }
          }
-         else
+         else if (money < costFPM2)
          {
              bomzh.Play();
          }
@@ -455,6 +502,9 @@ public class Menu : MonoBehaviour
              money -= costFPM3;
              costFPM3 = costFPM3 * 2;
              costFPM3Text.text = FormatNumber(costFPM3) + " $";
+             buttonFPM3.interactable = true;
+             FPM3Icon.SetActive(true);
+             FPM3q.SetActive(false);
              soundBoost.Play();
              cpsFPM3 += 50;
              while (true)
@@ -463,7 +513,7 @@ public class Menu : MonoBehaviour
                  yield return new WaitForSeconds(0.9f);
              }
          }
-         else
+         else if (money < costFPM3)
          {
              bomzh.Play();
          }
@@ -476,6 +526,9 @@ public class Menu : MonoBehaviour
              money -= costFPM4;
              costFPM4 = costFPM4 * 2;
              costFPM4Text.text = FormatNumber(costFPM4) + " $";
+             buttonFPM4.interactable = true;
+             FPM4Icon.SetActive(true);
+             FPM4q.SetActive(false);
              soundBoost.Play();
              cpsFPM4 += 200;
              while (true)
@@ -484,7 +537,7 @@ public class Menu : MonoBehaviour
                  yield return new WaitForSeconds(0.9f);
              }
          }
-         else
+         else if (money < costFPM4)
          {
              bomzh.Play();
          }
@@ -497,15 +550,18 @@ public class Menu : MonoBehaviour
              money -= costFPM5;
              costFPM5 = costFPM5 * 2;
              costFPM5Text.text = FormatNumber(costFPM5) + " $";
+             buttonFPM5.interactable = true;
+             FPM5Icon.SetActive(true);
+             FPM5q.SetActive(false);
              soundBoost.Play();
-             cpsFPM5 += 1000;
+             cpsFPM5 += 600;
              while (true)
              {
                  money += cpsFPM5;
                  yield return new WaitForSeconds(0.9f);
              }
          }
-         else
+         else if (money < costFPM5)
          {
              bomzh.Play();
          }
@@ -531,7 +587,7 @@ public class Menu : MonoBehaviour
                  graffiti.SetActive(true);
              }
          }
-         else
+         else if (money < 90)
          {
              bomzh.Play();
          }
@@ -557,7 +613,7 @@ public class Menu : MonoBehaviour
                  graffiti2.SetActive(true);
              }
          }
-         else
+         else if (money < 120)
          {
              bomzh.Play();
          }
@@ -583,7 +639,7 @@ public class Menu : MonoBehaviour
                  graffiti3.SetActive(true);
              }
          }
-         else
+         else if (money < 170)
          {
              bomzh.Play();
          }
@@ -603,7 +659,7 @@ public class Menu : MonoBehaviour
              button.transform.localScale = new Vector3(3, 16, 2);
              buttonImage.sprite = skin;
          }
-         else
+         else if (money < 99)
          {
              bomzh.Play();
          }
@@ -624,7 +680,7 @@ public class Menu : MonoBehaviour
              button.transform.localScale = new Vector3(3, 16, 2);
              buttonImage.sprite = skin2;
          }
-         else
+         else if (money < 150)
          {
              bomzh.Play();
          }
@@ -645,7 +701,7 @@ public class Menu : MonoBehaviour
              button.transform.localScale = new Vector3(4, 21, 3);
              buttonImage.sprite = skin3;
          }
-         else
+         else if (money < 200)
          {
              bomzh.Play();
          }
@@ -666,7 +722,7 @@ public class Menu : MonoBehaviour
              button.transform.localScale = new Vector3(2, 16, 2);
              buttonImage.sprite = skin4;
          }
-         else
+         else if (money < 250)
          {
              bomzh.Play();
          }
@@ -685,7 +741,7 @@ public class Menu : MonoBehaviour
          {
              bgImage.sprite = bgSkin1;
          }
-         else
+         else if (money < 200)
          {
              bomzh.Play();
          }
@@ -704,7 +760,7 @@ public class Menu : MonoBehaviour
          {
              bgImage.sprite = bgSkin2;
          }
-         else
+         else if (money < 300)
          {
              bomzh.Play();
          }
@@ -712,7 +768,7 @@ public class Menu : MonoBehaviour
 
      public void BuyBGSkin3()
      {
-         if(money >= 467 && chlen8 == true)
+         if(money >= 600 && chlen8 == true)
          { 
              money = money - 467;
              bgImage.sprite = bgSkin3;
@@ -723,11 +779,9 @@ public class Menu : MonoBehaviour
          {
              bgImage.sprite = bgSkin3;
          }
-         else
+         else if (money < 600)
          {
              bomzh.Play();
          }
-     }
-
-     
+     }     
 }
