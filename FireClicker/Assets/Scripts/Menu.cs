@@ -44,8 +44,8 @@ public class Menu : MonoBehaviour
      bool chlen6 = true;
 
      bool bool1 = true;
-     bool chlen7 = true;
-     bool chlen8 = true;
+     bool bool2 = true;
+     bool bool3 = true;
      public Image bgImage; // это тоже? да пiH
      public Sprite bgSkin1;
      public Sprite bgSkin2;
@@ -122,6 +122,18 @@ public class Menu : MonoBehaviour
      public GameObject graffitiesShopContent;
      public GameObject wallsShopContent;
 
+     public bool isSkin1Bought, isSkin2Bought, isSkin3Bought, isSkin4Bought;
+     private int activeSkinIndex; 
+
+     public bool isGrafffity1 = false;
+     public bool isGrafffity2 = false;
+     public bool isGrafffity3 = false;
+
+     public bool isWall1 = false;
+     public bool isWall2 = false;
+     public bool isWall3 = false;
+
+
      public GameObject skin1CostText;
      public GameObject skin2CostText;
      public GameObject skin3CostText;
@@ -137,14 +149,73 @@ public class Menu : MonoBehaviour
 
      public AudioSource bomzh;
 
+     public bool isBG1Bought, isBG2Bought, isBG3Bought;
+     private int activeBGIndex;
+
      private void Start()
      {
          money = PlayerPrefs.GetInt("money");
          totalMoney = PlayerPrefs.GetInt("totalMoney");
          currentLevel = PlayerPrefs.GetInt("currentLevel");
-          chlen = PlayerPrefs.GetInt("chlen") == 0;
-          moneyForClcik = PlayerPrefs.GetInt("moneyForClcik");
-         
+         chlen = PlayerPrefs.GetInt("chlen") == 0;
+         moneyForClcik = PlayerPrefs.GetInt("moneyForClcik");
+
+         isGrafffity1 = PlayerPrefs.GetInt("isGrafffity1", 0) == 1;
+         isGrafffity2 = PlayerPrefs.GetInt("isGrafffity2", 0) == 1;
+         isGrafffity3 = PlayerPrefs.GetInt("isGrafffity3", 0) == 1;
+
+         isSkin1Bought = PlayerPrefs.GetInt("Skin1Bought", 0) == 1;
+         isSkin2Bought = PlayerPrefs.GetInt("Skin2Bought", 0) == 1;
+         isSkin3Bought = PlayerPrefs.GetInt("Skin3Bought", 0) == 1;
+         isSkin4Bought = PlayerPrefs.GetInt("Skin4Bought", 0) == 1;
+
+         activeSkinIndex = PlayerPrefs.GetInt("ActiveSkin", 0);
+    
+         ApplyLoadedSkin(activeSkinIndex);
+
+         if (isSkin1Bought) skin1CostText.SetActive(false);
+         if (isSkin2Bought) skin2CostText.SetActive(false);
+         if (isSkin3Bought) skin3CostText.SetActive(false);
+         if (isSkin4Bought) skin4CostText.SetActive(false);
+
+         if (isGrafffity1)
+         {
+             graffiti.SetActive(true);
+             graffity1CostText.SetActive(false);
+         }
+         if (isGrafffity2)
+         {
+             graffiti2.SetActive(true);
+             graffity2CostText.SetActive(false);
+         }
+         if (isGrafffity3)
+         {
+             graffiti3.SetActive(true);
+             graffity3CostText.SetActive(false);
+         }
+
+         isBG1Bought = PlayerPrefs.GetInt("BG1Bought", 0) == 1;
+         isBG2Bought = PlayerPrefs.GetInt("BG2Bought", 0) == 1;
+         isBG3Bought = PlayerPrefs.GetInt("BG3Bought", 0) == 1;
+
+         activeBGIndex = PlayerPrefs.GetInt("ActiveBG", 0);
+    
+         if (isBG1Bought) bgSkin1CostText.SetActive(false);
+         if (isBG2Bought) bgSkin2CostText.SetActive(false);
+         if (isBG3Bought) bgSkin3CostText.SetActive(false);
+
+         if (activeBGIndex == 1) bgImage.sprite = bgSkin1;
+         else if (activeBGIndex == 2) bgImage.sprite = bgSkin2;
+         else if (activeBGIndex == 3) bgImage.sprite = bgSkin3;
+     }
+
+     void ApplyLoadedSkin(int index)
+     {
+         if (index == 5) { buttonImage.sprite = skin1; button.GetComponent<RectTransform>().sizeDelta = new Vector2(157, 26); }
+         if (index == 1) { buttonImage.sprite = skin; button.GetComponent<RectTransform>().sizeDelta = new Vector2(157, 25); }
+         if (index == 2) { buttonImage.sprite = skin2; button.GetComponent<RectTransform>().sizeDelta = new Vector2(157, 25); }
+         if (index == 3) { buttonImage.sprite = skin3; button.GetComponent<RectTransform>().sizeDelta = new Vector2(157, 25); }
+         if (index == 4) { buttonImage.sprite = skin4; button.GetComponent<RectTransform>().sizeDelta = new Vector2(93, 25); }
      }
 
      public void ButtonClick()
@@ -248,30 +319,25 @@ public class Menu : MonoBehaviour
      } 
      void Update()
      {
-          moneyText.text = FormatNumber(money) + " $";
-          PlayerPrefs.SetInt("moneyForClcik", moneyForClcik);  
-          if(money > 999)
-          {
-              moneyText.text = FormatNumber(money);
-          }
-          if(levelPoints >= nuzhnodenegchtoburovenapnut)
-          {
-            currentLevel++;
-            levelPoints = 0;
-            nuzhnodenegchtoburovenapnut = nuzhnodenegchtoburovenapnut * 1.5f;
-            slider.maxValue = nuzhnodenegchtoburovenapnut;
-            soundSliderLevel.Play();
-              PlayerPrefs.SetInt("currentLevel", currentLevel);
-          }
-          slider.value = (levelPoints % nuzhnodenegchtoburovenapnut);
+         
+         moneyText.text = FormatNumber(money) + " $";
+         PlayerPrefs.SetInt("moneyForClcik", moneyForClcik);  
+         if(money > 999)
+         {
+             moneyText.text = FormatNumber(money);
+         }
+         if(levelPoints >= nuzhnodenegchtoburovenapnut)
+         {
+             currentLevel++;
+             levelPoints = 0;
+             nuzhnodenegchtoburovenapnut = nuzhnodenegchtoburovenapnut * 1.5f;
+             slider.maxValue = nuzhnodenegchtoburovenapnut;
+             soundSliderLevel.Play();
+             PlayerPrefs.SetInt("currentLevel", currentLevel);
+         }
+         slider.value = (levelPoints % nuzhnodenegchtoburovenapnut);
 
-          levelText.text = currentLevel.ToString() + " Уровень";
-
-        if(chlen == false)
-        {
-            graffiti.SetActive(true);
-        }
-          
+         levelText.text = currentLevel.ToString() + " Уровень";
      } 
 
      public void startBoostTPM1()
@@ -557,25 +623,22 @@ public class Menu : MonoBehaviour
 
      public void BuyGrafiti()
      {
-         if(money >= 90 && chlen == true)
+         if (isGrafffity1) 
          {
-             money = money - 90;
+             graffiti.SetActive(!graffiti.activeSelf);
+             return;
+         }
+         if (money >= 90 && chlen == true)
+         {
+             money -= 90;
+             isGrafffity1 = true;
              graffiti.SetActive(true);
              chlen = false;
              graffity1CostText.SetActive(false);
              soundGrafiti.Play();
-              //  PlayerPrefs.SetInt("chlen", chlen?1 : 0);
-         }
-         else if(chlen == false)
-         {
-             if(graffiti.activeInHierarchy == true)
-             {
-                 graffiti.SetActive(false);
-             }
-             else
-             {
-                 graffiti.SetActive(true);
-             }
+         
+             PlayerPrefs.SetInt("isGrafffity1", 1);
+             PlayerPrefs.Save();
          }
          else if (money < 90)
          {
@@ -585,25 +648,22 @@ public class Menu : MonoBehaviour
 
      public void BuyGrafiti2()
      {
-         if(money >= 120 && chlen2 == true)
+         if (isGrafffity2) 
          {
-             money = money - 120;
+             graffiti2.SetActive(!graffiti2.activeSelf);
+             return;
+         }
+         if (money >= 120 && chlen2 == true)
+         {
+             money -= 120;
+             isGrafffity2 = true;
              graffiti2.SetActive(true);
              chlen2 = false;
              graffity2CostText.SetActive(false);
              soundGrafiti.Play();
-              
-         }
-         else if(chlen2 == false)
-         {
-             if(graffiti2.activeInHierarchy == true)
-             {
-                 graffiti2.SetActive(false);
-             }
-             else
-             {
-                 graffiti2.SetActive(true);
-             }
+         
+             PlayerPrefs.SetInt("isGrafffity2", 1);
+             PlayerPrefs.Save();
          }
          else if (money < 120)
          {
@@ -613,24 +673,22 @@ public class Menu : MonoBehaviour
 
      public void BuyGrafiti3()
      {
-         if(money >= 170 && chlen3 == true)
+         if (isGrafffity3) 
          {
-             money = money - 170;
+             graffiti3.SetActive(!graffiti3.activeSelf);
+             return;
+         }
+         if (money >= 170 && chlen3 == true)
+         {
+             money -= 170;
+             isGrafffity3 = true;
              graffiti3.SetActive(true);
              chlen3 = false;
              graffity3CostText.SetActive(false);
              soundGrafiti.Play();
-         }
-         else if(chlen3 == false)
-         {
-             if(graffiti3.activeInHierarchy == true)
-             {
-                 graffiti3.SetActive(false);
-             }
-             else
-             {
-                 graffiti3.SetActive(true);
-             }
+         
+             PlayerPrefs.SetInt("isGrafffity3", 1);
+             PlayerPrefs.Save();
          }
          else if (money < 170)
          {
@@ -639,25 +697,33 @@ public class Menu : MonoBehaviour
      }
      public void BuySkin1Button()
      {
-         button.transform.localScale = new Vector3(2, 17, 3);
+         PlayerPrefs.SetInt("ActiveSkin", 5); 
+         button.GetComponent<RectTransform>().sizeDelta = new Vector2(157, 26);
          buttonImage.sprite = skin1;
+         return;
      }
 
      public void BuySkin()
      {
-         if(money >= 99 && chlenS == true)
+         if (isSkin1Bought)
          {
-             money = money - 99;
-             button.transform.localScale = new Vector3(3, 16, 2);
              buttonImage.sprite = skin;
-             chlenS = false;
+             button.GetComponent<RectTransform>().sizeDelta = new Vector2(157, 25);
+             PlayerPrefs.SetInt("ActiveSkin", 1); 
+             return;
+         }
+         if (money >= 99 && chlenS == true)
+         {
+             money -= 99;
+             isSkin1Bought = true;
+             buttonImage.sprite = skin;
+             button.GetComponent<RectTransform>().sizeDelta = new Vector2(157, 25);
              skin1CostText.SetActive(false);
              soundBoost.Play();
-         }
-         else if(chlenS == false)
-         {
-             button.transform.localScale = new Vector3(3, 16, 2);
-             buttonImage.sprite = skin;
+ 
+             PlayerPrefs.SetInt("Skin1Bought", 1);
+             PlayerPrefs.SetInt("ActiveSkin", 1);
+             PlayerPrefs.Save();
          }
          else if (money < 99)
          {
@@ -667,20 +733,27 @@ public class Menu : MonoBehaviour
 
      public void BuySkin2()
      {
-         if(money >= 150 && chlen4 == true)
+         if (isSkin2Bought)
          {
-             money = money - 150;
-             button.transform.localScale = new Vector3(3, 16, 2);
              buttonImage.sprite = skin2;
-             chlen4 = false;
+             button.GetComponent<RectTransform>().sizeDelta = new Vector2(157, 25);
+             PlayerPrefs.SetInt("ActiveSkin", 2);
+             return;
+         }
+
+         if (money >= 150 && chlen4 == true)
+         {
+             money -= 150;
+             isSkin2Bought = true;
+             buttonImage.sprite = skin2;
+             button.GetComponent<RectTransform>().sizeDelta = new Vector2(157, 25);
              skin2CostText.SetActive(false);
              soundBoost.Play();
-         }
-         else if(chlen4 == false)
-         {
-             button.transform.localScale = new Vector3(3, 16, 2);
-             buttonImage.sprite = skin2;
-         }
+
+             PlayerPrefs.SetInt("Skin2Bought", 1);
+             PlayerPrefs.SetInt("ActiveSkin", 2);
+             PlayerPrefs.Save();
+         }    
          else if (money < 150)
          {
              bomzh.Play();
@@ -689,20 +762,27 @@ public class Menu : MonoBehaviour
 
      public void BuySkin3()
      {
-         if(money >= 200 && chlen5 == true)
+         if (isSkin3Bought)
          {
-             money = money - 200;
-             button.transform.localScale = new Vector3(4, 21, 3);
              buttonImage.sprite = skin3;
-             chlen5 = false;
+             button.GetComponent<RectTransform>().sizeDelta = new Vector2(157, 25);
+             PlayerPrefs.SetInt("ActiveSkin", 3);
+             return;
+         }
+
+         if (money >= 200 && chlen5 == true)
+         {
+             money -= 200;
+             isSkin3Bought = true;
+             buttonImage.sprite = skin3;
+             button.GetComponent<RectTransform>().sizeDelta = new Vector2(157, 25);
              skin3CostText.SetActive(false);
              soundBoost.Play();
-         }
-         else if(chlen5 == false)
-         {
-             button.transform.localScale = new Vector3(4, 21, 3);
-             buttonImage.sprite = skin3;
-         }
+
+             PlayerPrefs.SetInt("Skin3Bought", 1);
+             PlayerPrefs.SetInt("ActiveSkin", 3);
+             PlayerPrefs.Save();
+         }    
          else if (money < 200)
          {
              bomzh.Play();
@@ -711,83 +791,84 @@ public class Menu : MonoBehaviour
 
      public void BuySkin4()
      {
-         if(money >= 250 && chlen6 == true)
+         if (isSkin4Bought)
          {
-             money = money - 250;
-             button.transform.localScale = new Vector3(1, 14, 3);
              buttonImage.sprite = skin4;
-             chlen6 = false;
+             button.GetComponent<RectTransform>().sizeDelta = new Vector2(93, 25);
+             PlayerPrefs.SetInt("ActiveSkin", 4);
+             return;
+         }
+
+         if (money >= 250 && chlen6 == true)
+         {
+             money -= 250;
+             isSkin4Bought = true;
+             buttonImage.sprite = skin4;
+             button.GetComponent<RectTransform>().sizeDelta = new Vector2(93, 25);
              skin4CostText.SetActive(false);
              soundBoost.Play();
-         }
-         else if(chlen6 == false)
-         {
-             button.transform.localScale = new Vector3(1, 14, 3);
-             buttonImage.sprite = skin4;
-         }
+
+             PlayerPrefs.SetInt("Skin4Bought", 1);
+             PlayerPrefs.SetInt("ActiveSkin", 4);
+             PlayerPrefs.Save();
+         }    
          else if (money < 250)
          {
              bomzh.Play();
          }
      }
 
-     public void BuyBGSkin1()
+     public void BuyBGSkin1() 
      {
-         if(money >= 200 && bool1 == true)
-         { 
-             money = money - 200;
-             bgImage.sprite = bgSkin1;
-             bool1 = false;
+         if (isBG1Bought) { SetBG(1, bgSkin1); return; }
+    
+         if (money >= 200 && bool1) 
+         {
+             money -= 200;
+             isBG1Bought = true;
              bgSkin1CostText.SetActive(false);
-             soundBoost.Play();
-         }
-         else if(bool1 == false)
-         {
-             bgImage.sprite = bgSkin1;
-         }
-         else if (money < 200)
-         {
-             bomzh.Play();
-         }
+             PlayerPrefs.SetInt("BG1Bought", 1);
+             SetBG(1, bgSkin1);
+         }        
+         else if (money < 200) bomzh.Play();
      }
 
-     public void BuyBGSkin2()
+     public void BuyBGSkin2() 
      {
-         if(money >= 300 && chlen7 == true)
+         if (isBG2Bought) { SetBG(2, bgSkin2); return; }
+    
+         if (money >= 300 && bool2) 
          { 
-             money = money - 300;
-             bgImage.sprite = bgSkin2;
-             chlen7 = false;
+             money -= 300;
+             isBG2Bought = true;
              bgSkin2CostText.SetActive(false);
-             soundBoost.Play();
-         }
-         else if(chlen7 == false)
-         {
-             bgImage.sprite = bgSkin2;
-         }
-         else if (money < 300)
-         {
-             bomzh.Play();
-         }
+             PlayerPrefs.SetInt("BG2Bought", 1);
+             SetBG(2, bgSkin2);
+         } 
+         else if (money < 300) bomzh.Play();
      }
 
-     public void BuyBGSkin3()
+     public void BuyBGSkin3() 
      {
-         if(money >= 600 && chlen8 == true)
+         if (isBG3Bought) { SetBG(3, bgSkin3); return; }
+    
+         if (money >= 500 && bool3) 
          { 
-             money = money - 467;
-             bgImage.sprite = bgSkin3;
-             chlen8 = false;
+             money -= 500;
+             isBG3Bought = true;
              bgSkin3CostText.SetActive(false);
-             soundBoost.Play();
-         }
-         else if(chlen8 == false)
-         {
-             bgImage.sprite = bgSkin3;
-         }
-         else if (money < 600)
-         {
-             bomzh.Play();
-         }
-     }     
+             PlayerPrefs.SetInt("BG3Bought", 1);
+             SetBG(3, bgSkin3);
+         } 
+         else if (money < 500) bomzh.Play();
+     }
+
+     // Общий метод для смены спрайта и сохранения выбора
+     void SetBG(int index, Sprite skin)
+     {
+         bgImage.sprite = skin;
+         PlayerPrefs.SetInt("ActiveBG", index);
+         PlayerPrefs.Save();
+         soundBoost.Play();
+     }
 }
