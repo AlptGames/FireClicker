@@ -19,7 +19,7 @@ public class NewBehaviourScript : MonoBehaviour, IPointerDownHandler
     // Start is called before the first frame update
     void Start()
     {
-       // plusKnazhatiu = PlayerPrefs.GetInt("plusKnazhatiu");
+    
     }
 
     // Update is called once per frame
@@ -48,6 +48,7 @@ public class NewBehaviourScript : MonoBehaviour, IPointerDownHandler
             costCursor.text = FormatNumber(tsena) + " $";
             osnScript.moneyForClcik = osnScript.moneyForClcik + plusKnazhatiu;
             buySound.Play();
+           
         }
         else if (osnScript.money < tsena)
         {

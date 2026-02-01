@@ -8,7 +8,7 @@ using TMPro;
 
 public class Menu : MonoBehaviour
 {
-     public int money;
+     public int money; // это деньги за клик? нет
      public TMP_Text moneyText;
      public int totalMoney;
      public GameObject effect;
@@ -16,9 +16,12 @@ public class Menu : MonoBehaviour
      public AudioSource sound;
      public AudioSource soundGrafiti;
      bool chlen = true;
-     public GameObject graffiti;
-     public GameObject graffiti2;
-     public GameObject graffiti3;
+     public GameObject graffiti;//
+     public GameObject graffiti2;//
+     public GameObject graffiti3;// там где комментарии
+
+     public int gr;
+
      bool chlen2 = true;
      bool chlen3 = true;
      bool chlenS = true;
@@ -27,7 +30,9 @@ public class Menu : MonoBehaviour
      public AudioSource SkinSound;
      public AudioSource soundBoost;
      
-     public Sprite skin1;
+     public Sprite skin1; // ПОГНААААААААА
+
+     public int sk;
 
      public Sprite skin2;
      bool chlen4 = true;
@@ -41,10 +46,12 @@ public class Menu : MonoBehaviour
      bool bool1 = true;
      bool chlen7 = true;
      bool chlen8 = true;
-     public Image bgImage;
+     public Image bgImage; // это тоже? да пiH
      public Sprite bgSkin1;
      public Sprite bgSkin2;
      public Sprite bgSkin3;
+
+     public int bgSk;
 
      public int cpsFPM1 = 0;
      public int costFPM1 = 75;
@@ -96,7 +103,7 @@ public class Menu : MonoBehaviour
      public TMP_Text costTPM5Text;
      public Button buttonTPM5;
 
-     public int moneyForClcik = 1;
+     public int moneyForClcik = 1;// ПОНННННННННННННННННННННН
      public Slider slider;
      public int currentLevel;
      private int n = 1;
@@ -134,7 +141,10 @@ public class Menu : MonoBehaviour
      {
          money = PlayerPrefs.GetInt("money");
          totalMoney = PlayerPrefs.GetInt("totalMoney");
-         graffiti.SetActive(false);
+         currentLevel = PlayerPrefs.GetInt("currentLevel");
+          chlen = PlayerPrefs.GetInt("chlen") == 0;
+          moneyForClcik = PlayerPrefs.GetInt("moneyForClcik");
+         
      }
 
      public void ButtonClick()
@@ -239,7 +249,7 @@ public class Menu : MonoBehaviour
      void Update()
      {
           moneyText.text = FormatNumber(money) + " $";
-
+          PlayerPrefs.SetInt("moneyForClcik", moneyForClcik);  
           if(money > 999)
           {
               moneyText.text = FormatNumber(money);
@@ -251,10 +261,17 @@ public class Menu : MonoBehaviour
             nuzhnodenegchtoburovenapnut = nuzhnodenegchtoburovenapnut * 1.5f;
             slider.maxValue = nuzhnodenegchtoburovenapnut;
             soundSliderLevel.Play();
+              PlayerPrefs.SetInt("currentLevel", currentLevel);
           }
           slider.value = (levelPoints % nuzhnodenegchtoburovenapnut);
 
           levelText.text = currentLevel.ToString() + " Уровень";
+
+        if(chlen == false)
+        {
+            graffiti.SetActive(true);
+        }
+          
      } 
 
      public void startBoostTPM1()
@@ -547,6 +564,7 @@ public class Menu : MonoBehaviour
              chlen = false;
              graffity1CostText.SetActive(false);
              soundGrafiti.Play();
+              //  PlayerPrefs.SetInt("chlen", chlen?1 : 0);
          }
          else if(chlen == false)
          {
@@ -574,6 +592,7 @@ public class Menu : MonoBehaviour
              chlen2 = false;
              graffity2CostText.SetActive(false);
              soundGrafiti.Play();
+              
          }
          else if(chlen2 == false)
          {
