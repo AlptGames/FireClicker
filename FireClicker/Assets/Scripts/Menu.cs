@@ -47,69 +47,20 @@ public class Menu : MonoBehaviour
      bool bool2 = true;
      bool bool3 = true;
      public Image bgImage; // это тоже? да пiH
+     public Sprite bgSkin0;
      public Sprite bgSkin1;
      public Sprite bgSkin2;
      public Sprite bgSkin3;
 
      public int bgSk;
 
-     public int cpsFPM1 = 0;
-     public int costFPM1 = 75;
-     public TMP_Text costFPM1Text;
-     public Button buttonFPM1;
-
-     public int cpsFPM2 = 0;
-     public int costFPM2 = 300;
-     public TMP_Text costFPM2Text;
-     public Button buttonFPM2;
-
-     public int cpsFPM3 = 0;
-     public int costFPM3 = 1000;
-     public TMP_Text costFPM3Text;
-     public Button buttonFPM3;
-
-     public int cpsFPM4 = 0;
-     public int costFPM4 = 2500;
-     public TMP_Text costFPM4Text;
-     public Button buttonFPM4;
-
-     public int cpsFPM5 = 0;
-     public int costFPM5 = 5000;
-     public TMP_Text costFPM5Text;
-     public Button buttonFPM5;
-
-     public int cpsTPM1 = 0;
-     public int costTPM1 = 30;
-     public TMP_Text costTPM1Text;
-     public Button buttonTPM1;
-
-     public int cpsTPM2 = 0;
-     public int costTPM2 = 100;
-     public TMP_Text costTPM2Text;
-     public Button buttonTPM2;
-
-     public int cpsTPM3 = 0;
-     public int costTPM3 = 500;
-     public TMP_Text costTPM3Text;
-     public Button buttonTPM3;
-
-     public int cpsTPM4 = 0;
-     public int costTPM4 = 2000;
-     public TMP_Text costTPM4Text;
-     public Button buttonTPM4;
-
-     public int cpsTPM5 = 0;
-     public int costTPM5 = 5000;
-     public TMP_Text costTPM5Text;
-     public Button buttonTPM5;
-
-     public int moneyForClcik = 1;// ПОНННННННННННННННННННННН
+     public int moneyForClcik = 1;
      public Slider slider;
      public int currentLevel;
      private int n = 1;
      public TextMeshProUGUI levelText;
      public float nuzhnodenegchtoburovenapnut = 100;
-     public float levelPoints;
+     public int levelPoints;
      public AudioSource soundSliderLevel;
 
      public GameObject shopContent;
@@ -152,13 +103,15 @@ public class Menu : MonoBehaviour
      public bool isBG1Bought, isBG2Bought, isBG3Bought;
      private int activeBGIndex;
 
+
      private void Start()
      {
          money = PlayerPrefs.GetInt("money");
          totalMoney = PlayerPrefs.GetInt("totalMoney");
          currentLevel = PlayerPrefs.GetInt("currentLevel");
          chlen = PlayerPrefs.GetInt("chlen") == 0;
-         moneyForClcik = PlayerPrefs.GetInt("moneyForClcik");
+         moneyForClcik = PlayerPrefs.GetInt("moneyForClcik", 1);
+         levelPoints = PlayerPrefs.GetInt("levelPoints");
 
          isGrafffity1 = PlayerPrefs.GetInt("isGrafffity1", 0) == 1;
          isGrafffity2 = PlayerPrefs.GetInt("isGrafffity2", 0) == 1;
@@ -207,22 +160,24 @@ public class Menu : MonoBehaviour
          if (activeBGIndex == 1) bgImage.sprite = bgSkin1;
          else if (activeBGIndex == 2) bgImage.sprite = bgSkin2;
          else if (activeBGIndex == 3) bgImage.sprite = bgSkin3;
+         else if (activeBGIndex == 5) bgImage.sprite = bgSkin0;
      }
 
      void ApplyLoadedSkin(int index)
      {
-         if (index == 5) { buttonImage.sprite = skin1; button.GetComponent<RectTransform>().sizeDelta = new Vector2(157, 26); }
+         if (index == 5) { buttonImage.sprite = skin1; button.GetComponent<RectTransform>().sizeDelta = new Vector2(160, 26); }
          if (index == 1) { buttonImage.sprite = skin; button.GetComponent<RectTransform>().sizeDelta = new Vector2(157, 25); }
          if (index == 2) { buttonImage.sprite = skin2; button.GetComponent<RectTransform>().sizeDelta = new Vector2(157, 25); }
          if (index == 3) { buttonImage.sprite = skin3; button.GetComponent<RectTransform>().sizeDelta = new Vector2(157, 25); }
          if (index == 4) { buttonImage.sprite = skin4; button.GetComponent<RectTransform>().sizeDelta = new Vector2(93, 25); }
      }
 
-     public void ButtonClick()
+     public void ButtonClick() 
      {
          money = money + moneyForClcik;
          totalMoney++;
          levelPoints++;
+         PlayerPrefs.SetInt("levelPoints", levelPoints);
          PlayerPrefs.SetInt("money", money);
          PlayerPrefs.SetInt("totalMoney", totalMoney);
          Instantiate(effect, button.GetComponent<RectTransform>().position.normalized, Quaternion.identity);
@@ -308,7 +263,7 @@ public class Menu : MonoBehaviour
              canWalls = false;
          }
      }
-     public static string FormatNumber(float num) 
+     public string FormatNumber(float num) 
      { 
          if (num >= 1000000) 
              return (num / 1000000).ToString("0.##") + "M"; 
@@ -339,287 +294,6 @@ public class Menu : MonoBehaviour
 
          levelText.text = currentLevel.ToString() + " Уровень";
      } 
-
-     public void startBoostTPM1()
-     {
-         StartCoroutine(boosterTPM1());
-     }
-
-     public void startBoostTPM2()
-     {
-         StartCoroutine(boosterTPM2());
-     }
-
-     public void startBoostTPM3()
-     {
-         StartCoroutine(boosterTPM3());
-     }
-
-     public void startBoostTPM4()
-     {
-         StartCoroutine(boosterTPM4());
-     }
-
-     public void startBoostTPM5()
-     {
-         StartCoroutine(boosterTPM5());
-     }
-
-
-     public void startBoostFPM1()
-     {
-         StartCoroutine(boosterFPM1());
-     }
-
-     public void startBoostFPM2()
-     {
-         StartCoroutine(boosterFPM2());
-     }
-
-     public void startBoostFPM3()
-     {
-         StartCoroutine(boosterFPM3());
-     }
-
-     public void startBoostFPM4()
-     {
-         StartCoroutine(boosterFPM4());
-     }
-
-     public void startBoostFPM5()
-     {
-         StartCoroutine(boosterFPM5());
-     }
-
-     IEnumerator boosterTPM1()
-     {
-         float timer = 0f;
-         if (money >= costTPM1)
-         {
-             money -= costTPM1;
-             costTPM1 = costTPM1 * 2; 
-             costTPM1Text.text = FormatNumber(costTPM1) + " $";
-             buttonTPM1.interactable = true;
-             cpsTPM1 += 1;
-             soundBoost.Play();
-             while (timer <= 60)
-             {
-                 money += cpsTPM1;
-                 yield return new WaitForSeconds(0.5f); // пауза 2 секунды
-                 timer += 1f;
-             }
-         }
-         else if (money < costTPM1)
-         {
-             bomzh.Play();
-         }
-     }
-
-     IEnumerator boosterTPM2()
-     {
-         float timer = 0f;
-         if (money >= costTPM2)
-         {
-             money -= costTPM2;
-             costTPM2 = costTPM2 * 2; 
-             costTPM2Text.text = FormatNumber(costTPM2) + " $";
-             buttonTPM2.interactable = true;
-             cpsTPM2 += 20;
-             soundBoost.Play();
-             while (timer <= 60)
-             {
-                 money += cpsTPM2;
-                 yield return new WaitForSeconds(0.5f); // пауза 2 секунды
-                 timer += 1f;
-             }
-         }
-         else if (money < costTPM2)
-         {
-             bomzh.Play();
-         }
-     }
-
-     IEnumerator boosterTPM3()
-     {
-         float timer = 0f;
-         if (money >= costTPM3)
-         {
-             money -= costTPM3;
-             costTPM3 = costTPM3 * 2; 
-             costTPM3Text.text = FormatNumber(costTPM3) + " $";
-             buttonTPM3.interactable = true;
-             cpsTPM3 += 75;
-             soundBoost.Play();
-             while (timer <= 60)
-             {
-                 money += cpsTPM3;
-                 yield return new WaitForSeconds(0.5f); // пауза 2 секунды
-                 timer += 1f;
-             }
-         }
-         else if (money < costTPM3)
-         {
-             bomzh.Play();
-         }
-     }
-
-     IEnumerator boosterTPM4()
-     {
-         float timer = 0f;
-         if (money >= costTPM4)
-         {
-             money -= costTPM4;
-             costTPM4 = costTPM4 * 2; 
-             costTPM4Text.text = FormatNumber(costTPM4) + " $";
-             buttonTPM4.interactable = true;
-             cpsTPM4 += 150;
-             soundBoost.Play();
-             while (timer <= 60)
-             {
-                 money += cpsTPM4;
-                 yield return new WaitForSeconds(0.5f); // пауза 2 секунды
-                 timer += 1f;
-             }
-         }
-         else if (money < costTPM4)
-         {
-             bomzh.Play();
-         }
-     }
-
-     IEnumerator boosterTPM5()
-     {
-         float timer = 0f;
-         if (money >= costTPM5)
-         {
-             money -= costTPM5;
-             costTPM5 = costTPM5 * 2; 
-             costTPM5Text.text = FormatNumber(costTPM5) + " $";
-             buttonTPM5.interactable = true;
-             cpsTPM5 += 500;
-             soundBoost.Play();
-             while (timer <= 60)
-             {
-                 money += cpsTPM5;
-                 yield return new WaitForSeconds(0.5f); // пауза 2 секунды
-                 timer += 1f;
-             }
-         }
-         else if (money < costTPM5)
-         {
-             bomzh.Play();
-         }
-     }
-
-     IEnumerator boosterFPM1()
-     {
-         if (money >= costFPM1)
-         {
-             money -= costFPM1;
-             costFPM1 = costFPM1 * 2;
-             costFPM1Text.text = FormatNumber(costFPM1) + " $";
-             buttonFPM1.interactable = true;
-             soundBoost.Play();
-             cpsFPM1 += 1;
-             while (true)
-             {
-                 money += cpsFPM1;
-                 yield return new WaitForSeconds(0.9f);
-             }
-         }
-         else if (money < costFPM1)
-         {
-             bomzh.Play();
-         }
-     }
-
-     IEnumerator boosterFPM2()
-     {
-         if (money >= costFPM2)
-         {
-             money -= costFPM2;
-             costFPM2 = costFPM2 * 2;
-             costFPM2Text.text = FormatNumber(costFPM2) + " $";
-             buttonFPM2.interactable = true;
-             soundBoost.Play();
-             cpsFPM2 += 15;
-             while (true)
-             {
-                 money += cpsFPM2;
-                 yield return new WaitForSeconds(0.9f);
-             }
-         }
-         else if (money < costFPM2)
-         {
-             bomzh.Play();
-         }
-     }
-
-     IEnumerator boosterFPM3()
-     {
-         if (money >= costFPM3)
-         {
-             money -= costFPM3;
-             costFPM3 = costFPM3 * 2;
-             costFPM3Text.text = FormatNumber(costFPM3) + " $";
-             buttonFPM3.interactable = true;
-             soundBoost.Play();
-             cpsFPM3 += 50;
-             while (true)
-             {
-                 money += cpsFPM3;
-                 yield return new WaitForSeconds(0.9f);
-             }
-         }
-         else if (money < costFPM3)
-         {
-             bomzh.Play();
-         }
-     }
-
-     IEnumerator boosterFPM4()
-     {
-         if (money >= costFPM4)
-         {
-             money -= costFPM4;
-             costFPM4 = costFPM4 * 2;
-             costFPM4Text.text = FormatNumber(costFPM4) + " $";
-             buttonFPM4.interactable = true;
-             soundBoost.Play();
-             cpsFPM4 += 200;
-             while (true)
-             {
-                 money += cpsFPM4;
-                 yield return new WaitForSeconds(0.9f);
-             }
-         }
-         else if (money < costFPM4)
-         {
-             bomzh.Play();
-         }
-     }
-
-     IEnumerator boosterFPM5()
-     {
-         if (money >= costFPM5)
-         {
-             money -= costFPM5;
-             costFPM5 = costFPM5 * 2;
-             costFPM5Text.text = FormatNumber(costFPM5) + " $";
-             buttonFPM5.interactable = true;
-             soundBoost.Play();
-             cpsFPM5 += 600;
-             while (true)
-             {
-                 money += cpsFPM5;
-                 yield return new WaitForSeconds(0.9f);
-             }
-         }
-         else if (money < costFPM5)
-         {
-             bomzh.Play();
-         }
-     }
 
      public void BuyGrafiti()
      {
@@ -698,7 +372,7 @@ public class Menu : MonoBehaviour
      public void BuySkin1Button()
      {
          PlayerPrefs.SetInt("ActiveSkin", 5); 
-         button.GetComponent<RectTransform>().sizeDelta = new Vector2(157, 26);
+         button.GetComponent<RectTransform>().sizeDelta = new Vector2(160, 26);
          buttonImage.sprite = skin1;
          return;
      }
@@ -816,6 +490,12 @@ public class Menu : MonoBehaviour
          {
              bomzh.Play();
          }
+     }
+
+     public void BuyBGSkin0() 
+     {
+         PlayerPrefs.SetInt("BG0Bought", 1);
+         SetBG(4, bgSkin0);
      }
 
      public void BuyBGSkin1() 
