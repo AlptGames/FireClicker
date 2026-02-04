@@ -161,6 +161,8 @@ public class Menu : MonoBehaviour
          else if (activeBGIndex == 2) bgImage.sprite = bgSkin2;
          else if (activeBGIndex == 3) bgImage.sprite = bgSkin3;
          else if (activeBGIndex == 5) bgImage.sprite = bgSkin0;
+
+         
      }
 
      void ApplyLoadedSkin(int index)
