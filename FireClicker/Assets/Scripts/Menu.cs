@@ -284,7 +284,7 @@ public class Menu : MonoBehaviour
      void Update()
      {
          
-         moneyText.text = FormatNumber(money) + " $";
+         moneyText.text = FormatNumber(PlayerPrefs.GetInt("money")) + " $";
          PlayerPrefs.SetInt("moneyForClcik", moneyForClcik);  
          if(money > 999)
          {
