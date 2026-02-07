@@ -8,11 +8,16 @@ public class Reclama : MonoBehaviour
 {
     public string idAdv;
 
-    public Menu money;
+    public Menu script;
     
     void Start()
     {
-      money = GetComponent<Menu>();
+      script = GetComponent<Menu>();
+    }
+
+    void Update()
+    {
+       //script.moneyText.text = script.FormatNumber(script.money) + " $";
     }
 
       private void OnEnable()
@@ -30,13 +35,16 @@ public class Reclama : MonoBehaviour
         if(id == idAdv)
         {
             SetReward();
+             script.moneyText.text = script.FormatNumber(script.money) + " $";
         }
       } 
 
       public void SetReward()
       {
         int money = PlayerPrefs.GetInt("money");
-        PlayerPrefs.SetInt("money", money * 2);
+        PlayerPrefs.SetInt("money", script.money * 2);
+     // script.moneyText.text = script.FormatNumber(script.money) + " $";
+     
       }
 
       public void ShowRewardAdv_UseCallback()

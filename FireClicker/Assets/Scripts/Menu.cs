@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
 using TMPro;
+using YG;
 
 public class Menu : MonoBehaviour
 {
@@ -103,6 +104,7 @@ public class Menu : MonoBehaviour
      public bool isBG1Bought, isBG2Bought, isBG3Bought;
      private int activeBGIndex;
 
+      
 
      private void Start()
      {
@@ -162,7 +164,8 @@ public class Menu : MonoBehaviour
          else if (activeBGIndex == 3) bgImage.sprite = bgSkin3;
          else if (activeBGIndex == 5) bgImage.sprite = bgSkin0;
 
-         
+   
+    
      }
 
      void ApplyLoadedSkin(int index)
@@ -174,6 +177,10 @@ public class Menu : MonoBehaviour
          if (index == 4) { buttonImage.sprite = skin4; button.GetComponent<RectTransform>().sizeDelta = new Vector2(93, 25); }
      }
 
+     /*void DeletePlayerPrefs()
+    {
+        PlayerPrefs.DeleteAll();
+    }*/
      public void ButtonClick() 
      {
          money = money + moneyForClcik;
@@ -553,4 +560,50 @@ public class Menu : MonoBehaviour
          PlayerPrefs.Save();
          soundBoost.Play();
      }
+
+    /*  private void OnEnable()
+      {
+        YG2.onRewardAdv += Rewarded;
+      } 
+
+      private void OnDisable()
+      {
+        YG2.onRewardAdv -= Rewarded;
+      }
+
+      private void Rewarded(string id)
+      {
+        if(id == idAdv)
+        {
+            SetReward();
+        }
+      } 
+
+      public void SetReward()
+      {
+        int money = PlayerPrefs.GetInt("money");
+        PlayerPrefs.SetInt("money", money * 2);
+      }
+
+      public void ShowRewardAdv_UseCallback()
+      {
+        YG2.RewardedAdvShow(idAdv, () =>
+        {
+
+            SetReward();
+        });
+      }*/
+
+      public void ShowAdvReward()
+{
+    string id = "money"; // Передача id требуется для внутренней работы плагина
+    YG2.RewardedAdvShow(id, Reward);
+}
+
+public void Reward()
+{
+    // Выдаём вознаграждение
+    money = money * 2;
+}
+
 }
