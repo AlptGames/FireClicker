@@ -43,6 +43,7 @@ public class Reclama : MonoBehaviour
       {
         int money = PlayerPrefs.GetInt("money");
         PlayerPrefs.SetInt("money", script.money * 2);
+         //PlayerPrefs.SetInt("money", script.totalMoney * 2);
      // script.moneyText.text = script.FormatNumber(script.money) + " $";
      
       }

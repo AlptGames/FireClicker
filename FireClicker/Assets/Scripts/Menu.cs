@@ -47,7 +47,7 @@ public class Menu : MonoBehaviour
      bool bool1 = true;
      bool bool2 = true;
      bool bool3 = true;
-     public Image bgImage; // это тоже? да пiH
+     public Image bgImage; 
      public Sprite bgSkin0;
      public Sprite bgSkin1;
      public Sprite bgSkin2;
@@ -104,7 +104,10 @@ public class Menu : MonoBehaviour
      public bool isBG1Bought, isBG2Bought, isBG3Bought;
      private int activeBGIndex;
 
-      
+        public Sprite skin5ANgliyskiy;
+        public Sprite skin6Geometriya;
+
+        public Sprite skin7Literatura;
 
      private void Start()
      {
@@ -164,7 +167,8 @@ public class Menu : MonoBehaviour
          else if (activeBGIndex == 3) bgImage.sprite = bgSkin3;
          else if (activeBGIndex == 5) bgImage.sprite = bgSkin0;
 
-   
+        
+    //DeletePlayerPrefs();
     
      }
 
@@ -174,7 +178,7 @@ public class Menu : MonoBehaviour
          if (index == 1) { buttonImage.sprite = skin; button.GetComponent<RectTransform>().sizeDelta = new Vector2(157, 25); }
          if (index == 2) { buttonImage.sprite = skin2; button.GetComponent<RectTransform>().sizeDelta = new Vector2(157, 25); }
          if (index == 3) { buttonImage.sprite = skin3; button.GetComponent<RectTransform>().sizeDelta = new Vector2(157, 25); }
-         if (index == 4) { buttonImage.sprite = skin4; button.GetComponent<RectTransform>().sizeDelta = new Vector2(93, 25); }
+         if (index == 4) { buttonImage.sprite = skin4; button.GetComponent<RectTransform>().sizeDelta = new Vector2(157, 25); }
      }
 
      /*void DeletePlayerPrefs()
@@ -286,10 +290,7 @@ public class Menu : MonoBehaviour
          
          moneyText.text = FormatNumber(PlayerPrefs.GetInt("money")) + " $";
          PlayerPrefs.SetInt("moneyForClcik", moneyForClcik);  
-         if(money > 999)
-         {
-             moneyText.text = FormatNumber(money);
-         }
+        
          if(levelPoints >= nuzhnodenegchtoburovenapnut)
          {
              currentLevel++;
@@ -302,6 +303,46 @@ public class Menu : MonoBehaviour
          slider.value = (levelPoints % nuzhnodenegchtoburovenapnut);
 
          levelText.text = currentLevel.ToString() + " Уровень";
+
+
+         if(currentLevel == 0)
+         {
+             buttonImage.sprite = skin;
+         }
+         if(currentLevel == 1)
+         {
+             buttonImage.sprite = skin1;
+         }
+
+          if(currentLevel == 2)
+         {
+             buttonImage.sprite = skin6Geometriya;
+         }
+
+          if(currentLevel == 3)
+         {
+             buttonImage.sprite = skin5ANgliyskiy; 
+         }
+
+          if(currentLevel == 4)
+         {
+             buttonImage.sprite = skin7Literatura;
+         }
+
+          if(currentLevel == 5)
+         {
+             buttonImage.sprite = skin2;
+         }
+
+          if(currentLevel == 6)
+         {
+             buttonImage.sprite = skin3;
+         }
+
+          if(currentLevel == 27)
+         {
+             buttonImage.sprite = skin4;
+         }
      } 
 
      public void BuyGrafiti()
@@ -386,7 +427,7 @@ public class Menu : MonoBehaviour
          return;
      }
 
-     public void BuySkin()
+    /* public void BuySkin()
      {
          if (isSkin1Bought)
          {
@@ -477,7 +518,7 @@ public class Menu : MonoBehaviour
          if (isSkin4Bought)
          {
              buttonImage.sprite = skin4;
-             button.GetComponent<RectTransform>().sizeDelta = new Vector2(93, 25);
+             button.GetComponent<RectTransform>().sizeDelta = new Vector2(157, 25);
              PlayerPrefs.SetInt("ActiveSkin", 4);
              return;
          }
@@ -487,7 +528,7 @@ public class Menu : MonoBehaviour
              money -= 250;
              isSkin4Bought = true;
              buttonImage.sprite = skin4;
-             button.GetComponent<RectTransform>().sizeDelta = new Vector2(93, 25);
+             button.GetComponent<RectTransform>().sizeDelta = new Vector2(157, 25);
              skin4CostText.SetActive(false);
              soundBoost.Play();
 
@@ -499,7 +540,7 @@ public class Menu : MonoBehaviour
          {
              bomzh.Play();
          }
-     }
+     }*/
 
      public void BuyBGSkin0() 
      {
