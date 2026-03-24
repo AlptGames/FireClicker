@@ -319,8 +319,12 @@ public class Menu : MonoBehaviour
   //     money = PlayerPrefs.GetInt("money");
          
          moneyText.text = FormatNumber(PlayerPrefs.GetInt("money")) + " $";
+<<<<<<< HEAD
          PlayerPrefs.SetInt("moneyForClcik", moneyForClcik);  
         
+=======
+         PlayerPrefs.SetInt("moneyForClcik", moneyForClcik);
+>>>>>>> 89d77d5b335e1b5f9fb75bca9a95d92e370e33c1
          if(levelPoints >= nuzhnodenegchtoburovenapnut)
          {
              currentLevel++;
