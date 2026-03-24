@@ -9,7 +9,7 @@ using YG;
 
 public class Menu : MonoBehaviour
 {
-     public int money; // это деньги за клик? нет
+     public int money; 
      public TMP_Text moneyText;
      public int totalMoney;
      public GameObject effect;
@@ -19,7 +19,7 @@ public class Menu : MonoBehaviour
      bool chlen = true;
      public GameObject graffiti;//
      public GameObject graffiti2;//
-     public GameObject graffiti3;// там где комментарии
+     public GameObject graffiti3;//
 
      public int gr;
 
@@ -31,7 +31,7 @@ public class Menu : MonoBehaviour
      public AudioSource SkinSound;
      public AudioSource soundBoost;
      
-     public Sprite skin1; // ПОГНААААААААА
+     public Sprite skin1; 
 
      public int sk;
 
@@ -109,8 +109,19 @@ public class Menu : MonoBehaviour
 
         public Sprite skin7Literatura;
 
+        public Sprite skin8Fizika;
+        public Sprite skin9Astronomia;
+        public Sprite skin10OBZ;
+
      private void Start()
      {
+
+          // Загружаем один раз при старте
+        money = PlayerPrefs.GetInt("money", 0);
+        moneyForClcik = PlayerPrefs.GetInt("moneyForClcik", 1);
+        UpdateUI();
+
+
          money = PlayerPrefs.GetInt("money");
          totalMoney = PlayerPrefs.GetInt("totalMoney");
          currentLevel = PlayerPrefs.GetInt("currentLevel");
@@ -171,6 +182,23 @@ public class Menu : MonoBehaviour
     //DeletePlayerPrefs();
     
      }
+
+     // Метод для обновления текста (вызывай его только при изменении денег)
+    public void UpdateUI()
+    {
+        moneyText.text = FormatNumber(money) + " $";
+          
+    }
+
+    // Метод для сохранения (вызывай его после изменений)
+    public void SaveData()
+    {
+        PlayerPrefs.SetInt("money", money);
+        PlayerPrefs.SetInt("moneyForClcik", moneyForClcik);
+        PlayerPrefs.Save();
+    }
+
+   
 
      void ApplyLoadedSkin(int index)
      {
@@ -287,6 +315,8 @@ public class Menu : MonoBehaviour
      } 
      void Update()
      {
+       // PlayerPrefs.SetInt("money", money);
+  //     money = PlayerPrefs.GetInt("money");
          
          moneyText.text = FormatNumber(PlayerPrefs.GetInt("money")) + " $";
          PlayerPrefs.SetInt("moneyForClcik", moneyForClcik);  
@@ -339,9 +369,24 @@ public class Menu : MonoBehaviour
              buttonImage.sprite = skin3;
          }
 
-          if(currentLevel == 27)
+          if(currentLevel == 7)
          {
              buttonImage.sprite = skin4;
+         }
+
+           if(currentLevel == 8)
+         {
+             buttonImage.sprite = skin8Fizika;
+         }
+
+           if(currentLevel == 9)
+         {
+             buttonImage.sprite = skin9Astronomia;
+         }
+
+           if(currentLevel == 10)
+         {
+             buttonImage.sprite = skin10OBZ;
          }
      } 
 
@@ -352,19 +397,19 @@ public class Menu : MonoBehaviour
              graffiti.SetActive(!graffiti.activeSelf);
              return;
          }
-         if (money >= 90 && chlen == true)
+         if (money >= 80 && chlen == true)
          {
-             money -= 90;
+             money -= 80;
              isGrafffity1 = true;
              graffiti.SetActive(true);
              chlen = false;
              graffity1CostText.SetActive(false);
-             soundGrafiti.Play();
+             soundBoost.Play();
          
              PlayerPrefs.SetInt("isGrafffity1", 1);
              PlayerPrefs.Save();
          }
-         else if (money < 90)
+         else if (money < 80)
          {
              bomzh.Play();
          }
@@ -377,19 +422,19 @@ public class Menu : MonoBehaviour
              graffiti2.SetActive(!graffiti2.activeSelf);
              return;
          }
-         if (money >= 120 && chlen2 == true)
+         if (money >= 130 && chlen2 == true)
          {
-             money -= 120;
+             money -= 130;
              isGrafffity2 = true;
              graffiti2.SetActive(true);
              chlen2 = false;
              graffity2CostText.SetActive(false);
-             soundGrafiti.Play();
+             soundBoost.Play();
          
              PlayerPrefs.SetInt("isGrafffity2", 1);
              PlayerPrefs.Save();
          }
-         else if (money < 120)
+         else if (money < 130)
          {
              bomzh.Play();
          }
@@ -402,19 +447,19 @@ public class Menu : MonoBehaviour
              graffiti3.SetActive(!graffiti3.activeSelf);
              return;
          }
-         if (money >= 170 && chlen3 == true)
+         if (money >= 200 && chlen3 == true)
          {
-             money -= 170;
+             money -= 200;
              isGrafffity3 = true;
              graffiti3.SetActive(true);
              chlen3 = false;
              graffity3CostText.SetActive(false);
-             soundGrafiti.Play();
+             soundBoost.Play();
          
              PlayerPrefs.SetInt("isGrafffity3", 1);
              PlayerPrefs.Save();
          }
-         else if (money < 170)
+         else if (money < 200)
          {
              bomzh.Play();
          }
