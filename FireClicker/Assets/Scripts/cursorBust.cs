@@ -23,6 +23,9 @@ public class CursorUpgrade : MonoBehaviour, IPointerDownHandler
 
     private float currentPrice;
 
+    public Image cursor;
+    public Sprite customCursor;
+
     void Start()
     {
         LoadData();
@@ -62,6 +65,7 @@ public class CursorUpgrade : MonoBehaviour, IPointerDownHandler
         // ������ ������� ����: ��� ������, ��� ��� �������/��������������
         bool isUnlocked = PlayerPrefs.GetInt(upgradeID + "_Unlocked", 0) == 1;
         thisButton.interactable = isFirstUpgrade || isUnlocked;
+        cursor.sprite = customCursor;
     }
 
     public void UnlockNext()

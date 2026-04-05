@@ -26,15 +26,14 @@ public class Menu : MonoBehaviour
      bool chlen2 = true;
      bool chlen3 = true;
      bool chlenS = true;
-     public Sprite skin;
      public Image buttonImage;
      public AudioSource SkinSound;
      public AudioSource soundBoost;
      
-     public Sprite skin1; 
-
      public int sk;
 
+     public Sprite skin;
+     public Sprite skin1;
      public Sprite skin2;
      bool chlen4 = true;
 
@@ -43,6 +42,14 @@ public class Menu : MonoBehaviour
 
      public Sprite skin4;
      bool chlen6 = true;
+
+     public Sprite skin5ANgliyskiy;
+     public Sprite skin6Geometriya;
+     public Sprite skin7Literatura;
+     public Sprite skin8Fizika;
+     public Sprite skin9Astronomia;
+     public Sprite skin10OBZ;
+     public Sprite skin11;
 
      bool bool1 = true;
      bool bool2 = true;
@@ -103,15 +110,6 @@ public class Menu : MonoBehaviour
 
      public bool isBG1Bought, isBG2Bought, isBG3Bought;
      private int activeBGIndex;
-
-        public Sprite skin5ANgliyskiy;
-        public Sprite skin6Geometriya;
-
-        public Sprite skin7Literatura;
-
-        public Sprite skin8Fizika;
-        public Sprite skin9Astronomia;
-        public Sprite skin10OBZ;
 
      private void Start()
      {
@@ -186,7 +184,7 @@ public class Menu : MonoBehaviour
      // Метод для обновления текста (вызывай его только при изменении денег)
     public void UpdateUI()
     {
-        moneyText.text = FormatNumber(money) + " $";
+        moneyText.text = FormatNumber(money) + " Гб";
           
     }
 
@@ -315,16 +313,12 @@ public class Menu : MonoBehaviour
      } 
      void Update()
      {
-       // PlayerPrefs.SetInt("money", money);
-  //     money = PlayerPrefs.GetInt("money");
-         
-         moneyText.text = FormatNumber(PlayerPrefs.GetInt("money")) + " $";
-<<<<<<< HEAD
+         PlayerPrefs.SetInt("money", money);
+         UpdateUI();
+         moneyText.text = FormatNumber(PlayerPrefs.GetInt("money")) + " Гб";
          PlayerPrefs.SetInt("moneyForClcik", moneyForClcik);  
-        
-=======
          PlayerPrefs.SetInt("moneyForClcik", moneyForClcik);
->>>>>>> 89d77d5b335e1b5f9fb75bca9a95d92e370e33c1
+
          if(levelPoints >= nuzhnodenegchtoburovenapnut)
          {
              currentLevel++;
@@ -347,52 +341,55 @@ public class Menu : MonoBehaviour
          {
              buttonImage.sprite = skin1;
          }
-
-          if(currentLevel == 2)
-         {
-             buttonImage.sprite = skin6Geometriya;
-         }
-
-          if(currentLevel == 3)
-         {
-             buttonImage.sprite = skin5ANgliyskiy; 
-         }
-
-          if(currentLevel == 4)
-         {
-             buttonImage.sprite = skin7Literatura;
-         }
-
-          if(currentLevel == 5)
+         if(currentLevel == 2)
          {
              buttonImage.sprite = skin2;
          }
 
-          if(currentLevel == 6)
+         if(currentLevel == 3)
          {
-             buttonImage.sprite = skin3;
+             buttonImage.sprite = skin3; 
          }
 
-          if(currentLevel == 7)
+         if(currentLevel == 4)
          {
              buttonImage.sprite = skin4;
          }
 
-           if(currentLevel == 8)
+         if(currentLevel == 5)
+         {
+             buttonImage.sprite = skin5ANgliyskiy;
+         }
+
+         if(currentLevel == 6)
+         {
+             buttonImage.sprite = skin6Geometriya;
+         }
+
+         if(currentLevel == 7)
+         {
+             buttonImage.sprite = skin7Literatura;
+         }
+
+         if(currentLevel == 8)
          {
              buttonImage.sprite = skin8Fizika;
          }
 
-           if(currentLevel == 9)
+         if(currentLevel == 9)
          {
              buttonImage.sprite = skin9Astronomia;
          }
 
-           if(currentLevel == 10)
+         if(currentLevel == 10)
          {
              buttonImage.sprite = skin10OBZ;
          }
-     } 
+         if (currentLevel == 10)
+         {
+             buttonImage.sprite = skin11;
+         } 
+    } 
 
      public void BuyGrafiti()
      {
@@ -685,15 +682,15 @@ public class Menu : MonoBehaviour
       }*/
 
       public void ShowAdvReward()
-{
-    string id = "money"; // Передача id требуется для внутренней работы плагина
-    YG2.RewardedAdvShow(id, Reward);
-}
+      {
+          string id = "money"; // Передача id требуется для внутренней работы плагина
+          YG2.RewardedAdvShow(id, Reward);
+      }
 
-public void Reward()
-{
-    // Выдаём вознаграждение
-    money = money * 2;
-}
+      public void Reward()
+      {
+          // Выдаём вознаграждение
+          money = money * 2;
+      }
 
 }
