@@ -315,7 +315,7 @@ public class Menu : MonoBehaviour
      {
          PlayerPrefs.SetInt("money", money);
          UpdateUI();
-         moneyText.text = FormatNumber(PlayerPrefs.GetInt("money")) + " Гб";
+         moneyText.text = FormatNumber(PlayerPrefs.GetInt("money"));
          PlayerPrefs.SetInt("moneyForClcik", moneyForClcik);  
          PlayerPrefs.SetInt("moneyForClcik", moneyForClcik);
 
@@ -398,9 +398,9 @@ public class Menu : MonoBehaviour
              graffiti.SetActive(!graffiti.activeSelf);
              return;
          }
-         if (money >= 80 && chlen == true)
+         if (money >= 100 && chlen == true)
          {
-             money -= 80;
+             money -= 100;
              isGrafffity1 = true;
              graffiti.SetActive(true);
              chlen = false;
@@ -410,7 +410,7 @@ public class Menu : MonoBehaviour
              PlayerPrefs.SetInt("isGrafffity1", 1);
              PlayerPrefs.Save();
          }
-         else if (money < 80)
+         else if (money < 100)
          {
              bomzh.Play();
          }
@@ -423,9 +423,9 @@ public class Menu : MonoBehaviour
              graffiti2.SetActive(!graffiti2.activeSelf);
              return;
          }
-         if (money >= 130 && chlen2 == true)
+         if (money >= 500 && chlen2 == true)
          {
-             money -= 130;
+             money -= 500;
              isGrafffity2 = true;
              graffiti2.SetActive(true);
              chlen2 = false;
@@ -435,7 +435,7 @@ public class Menu : MonoBehaviour
              PlayerPrefs.SetInt("isGrafffity2", 1);
              PlayerPrefs.Save();
          }
-         else if (money < 130)
+         else if (money < 500)
          {
              bomzh.Play();
          }
@@ -448,9 +448,9 @@ public class Menu : MonoBehaviour
              graffiti3.SetActive(!graffiti3.activeSelf);
              return;
          }
-         if (money >= 200 && chlen3 == true)
+         if (money >= 1000 && chlen3 == true)
          {
-             money -= 200;
+             money -= 1000;
              isGrafffity3 = true;
              graffiti3.SetActive(true);
              chlen3 = false;
@@ -460,7 +460,7 @@ public class Menu : MonoBehaviour
              PlayerPrefs.SetInt("isGrafffity3", 1);
              PlayerPrefs.Save();
          }
-         else if (money < 200)
+         else if (money < 1000)
          {
              bomzh.Play();
          }
@@ -598,45 +598,45 @@ public class Menu : MonoBehaviour
      {
          if (isBG1Bought) { SetBG(1, bgSkin1); return; }
     
-         if (money >= 200 && bool1) 
+         if (money >= 500 && bool1) 
          {
-             money -= 200;
+             money -= 500;
              isBG1Bought = true;
              bgSkin1CostText.SetActive(false);
              PlayerPrefs.SetInt("BG1Bought", 1);
              SetBG(1, bgSkin1);
          }        
-         else if (money < 200) bomzh.Play();
+         else if (money < 500) bomzh.Play();
      }
 
      public void BuyBGSkin2() 
      {
          if (isBG2Bought) { SetBG(2, bgSkin2); return; }
     
-         if (money >= 300 && bool2) 
+         if (money >= 1000 && bool2) 
          { 
-             money -= 300;
+             money -= 1000;
              isBG2Bought = true;
              bgSkin2CostText.SetActive(false);
              PlayerPrefs.SetInt("BG2Bought", 1);
              SetBG(2, bgSkin2);
          } 
-         else if (money < 300) bomzh.Play();
+         else if (money < 1000) bomzh.Play();
      }
 
      public void BuyBGSkin3() 
      {
          if (isBG3Bought) { SetBG(3, bgSkin3); return; }
     
-         if (money >= 500 && bool3) 
+         if (money >= 5000 && bool3) 
          { 
-             money -= 500;
+             money -= 5000;
              isBG3Bought = true;
              bgSkin3CostText.SetActive(false);
              PlayerPrefs.SetInt("BG3Bought", 1);
              SetBG(3, bgSkin3);
          } 
-         else if (money < 500) bomzh.Play();
+         else if (money < 5000) bomzh.Play();
      }
 
      // Общий метод для смены спрайта и сохранения выбора
