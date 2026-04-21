@@ -6633,6 +6633,8 @@ MonoBehaviour:
   skin9Astronomia: {fileID: 21300000, guid: a2cf39d3d9ee8a9498e82466754fdab8, type: 3}
   skin10OBZ: {fileID: 21300000, guid: 6ae9bf82921c9cd45816be77b2ed9800, type: 3}
   skin11: {fileID: 21300000, guid: d2e0da36fec35bf4595e7aeb60888a85, type: 3}
+  skin12: {fileID: 21300000, guid: a947b0ac90e0553488ac88fe3827232e, type: 3}
+  skin13: {fileID: 21300000, guid: 6f5e89fe51985c14f85eebd9dcfe4143, type: 3}
   bgImage: {fileID: 177483880}
   bgSkin0: {fileID: 21300000, guid: 26e723914775a83469f51e4ff174e180, type: 3}
   bgSkin1: {fileID: 21300000, guid: 2fb92791754779e42892aeb32f8e5671, type: 3}
@@ -14245,14 +14247,14 @@ RectTransform:
   m_GameObject: {fileID: 1112564763}
   m_LocalRotation: {x: -0, y: -0, z: 0.019925263, w: 0.99980146}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.0502574, y: 1.1514273, z: 1.1149}
+  m_LocalScale: {x: 0.66037035, y: 0.72398293, z: 0.70101565}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1772057980}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 2.283}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: -22.879997, y: -1.076}
+  m_AnchoredPosition: {x: -21, y: -1.2}
   m_SizeDelta: {x: 57, y: 21.955}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1112564765

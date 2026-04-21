@@ -50,6 +50,10 @@ public class Menu : MonoBehaviour
      public Sprite skin9Astronomia;
      public Sprite skin10OBZ;
      public Sprite skin11;
+                                    public Sprite skin12;
+                                    public Sprite skin13;
+     
+    
 
      bool bool1 = true;
      bool bool2 = true;
@@ -385,9 +389,19 @@ public class Menu : MonoBehaviour
          {
              buttonImage.sprite = skin10OBZ;
          }
-         if (currentLevel == 10)
+         if (currentLevel == 11)
          {
              buttonImage.sprite = skin11;
+         } 
+
+          if (currentLevel == 12)
+         {
+             buttonImage.sprite = skin12;
+         } 
+
+            if (currentLevel == 13)
+         {
+             buttonImage.sprite = skin13;
          } 
     } 
 
